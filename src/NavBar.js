@@ -36,6 +36,7 @@ function ChessNavBar({ onNavigate }) {
 			<NavButton to="/">Home</NavButton>
 			<NavButton to="/themes">Themes</NavButton>
 			<NavButton to="/play">Play</NavButton>
+			<NavButton href="https://chess-no-25-docs.vercel.app">Docs</NavButton>
 			<NavButton href="https://github.com/romw314/chess-no-25">GitHub</NavButton>
 		</NavBar>
 	);

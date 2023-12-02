@@ -264,7 +264,7 @@ Click `Create pull request`.
 
 ![Screenshot](img/create-pr.jpeg)
 
-After a while, you will see that auto-checks are running and there is a `Visit Preview` link which you can use to try your theme. You will also see the status which will be `Open`. When the status changes to `Closed`, it means that your new theme is declined. When the status changes to `Merged`, it means that your theme is accepted and you can find it on the [Chess No. 25 nightly version](https://chess-no-25-nightly.vercel.app){:target=blank}.
+After a while, you will see that auto-checks are running and there is a `Visit Preview` link which you can use to try your theme. Please note that the right preview is the preview for `chess-no-25`, not `chess-no-25-docs`. You will also see the status which will be `Open`. When the status changes to `Closed`, it means that your new theme is declined. When the status changes to `Merged`, it means that your theme is accepted and you can find it on the [Chess No. 25 nightly version](https://chess-no-25-nightly.vercel.app){:target=blank}.
 
 ![Screenshot](img/pr-created.jpeg)
 

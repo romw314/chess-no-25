@@ -35,6 +35,7 @@ function ThemesPage() {
 		<>
 			<p>Please choose a theme:</p>
 			<ul>{themelist}</ul>
+			<p><a href="https://chess-no-25-docs.vercel.app/tutorial-creating-your-custom-theme/" rel="noopener" target="blank">Create your own</a></p>
 		</>
 	);
 }

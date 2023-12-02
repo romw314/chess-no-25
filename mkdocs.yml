@@ -1,0 +1,14 @@
+site_name: Chess No. 25
+repo_url: https://github.com/romw314/chess-no-25/
+edit_uri: edit/master/docs
+theme:
+  name: readthedocs
+  locale: en
+nav:
+  - Home: 'index.md'
+  - 'tutorial-creating-your-custom-theme.md'
+plugins:
+  - search
+markdown_extensions:
+  - attr_list
+  - tables

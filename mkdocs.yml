@@ -12,3 +12,5 @@ plugins:
 markdown_extensions:
   - attr_list
   - tables
+extra_css:
+  - style.css

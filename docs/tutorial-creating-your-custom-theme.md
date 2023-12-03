@@ -5,9 +5,12 @@
 To create you own theme for Chess No. 25, you will need a GitHub account, a web browser and an internet connection.
 If you don't have a GitHub account already you can [create a new one](https://github.com/signup){:target=blank}.
 
+In this guide we assume that you are using a Windows machine, but you can do the same steps on Linux or macOS (the steps may be a little different on other systems).
+
 ## 1. Fork Chess No. 25
 
 > ***NOTE:***
+>
 > If you have already forked Chess No. 25, you can skip this step.
 
 To start, [sign in to GitHub](https://github.com){:target=blank} and navigate to [the Chess No. 25 repository](https://github.com/romw314/chess-no-25){:target=blank}.
@@ -15,12 +18,12 @@ To start, [sign in to GitHub](https://github.com){:target=blank} and navigate to
 You should see something like this:
 ![Screenshot](img/fork.jpeg)
 
-Click the `Fork` button.
+Click the **Fork** button.
 
 You should see something like this:
 ![Screenshot](img/finish-fork.jpeg)
 
-Click the `Create fork` button. After a short time, it should take you into the newly created fork
+Click the **Create fork** button. After a short time, it should take you into the newly created fork
 
 ## 2. Choose what theme do you want to create
 
@@ -37,7 +40,7 @@ Another example: if you are creating a theme named `Lavender & Vanilla`, the int
 
 ## 3. Ensure that the theme do you want to create does not exist
 
-Go to your newly created fork of Chess No. 25 on GitHub and enter `src/themes.json` into the `Go to file` text box. It should find a file named `src/themes.json` in the repository. Open the file by clicking it.
+Go to your newly created fork of Chess No. 25 on GitHub and enter `src/themes.json` into the **Go to file** text box. It should find a file named `src/themes.json` in the repository. Open the file by clicking it.
 
 ![Screenshot](img/search-themes-json.jpeg)
 
@@ -109,19 +112,19 @@ Also check for other names. For example, if you are creating a theme named `Lave
 
 ## 4. Write the code for your theme
 
-Go to your forked Chess No. 25 repo and click something like `1 Branch` or `2 Branches`.
+Go to your forked Chess No. 25 repo and click the button that will contain something like **1 Branch** or **2 Branches**.
 
 ![Screenshot](img/open-branches.jpeg)
 
-Click `New branch` and enter some unique name for this branch. For example, if you are creating a theme named `Nature`, you can name it `add-theme-nature`. Then click `Create new branch`.
+Click **New branch** and enter some unique name for this branch. For example, if you are creating a theme named `Nature`, you can name it `add-theme-nature`. Then click **Create new branch**.
 
 ![Screenshot](img/create-branch.jpeg)
 
-Click the created branch (you can click it either in `Your branches` or in `Active branches`).
+Click the created branch (you can click it either in **Your branches** or in **Active branches**).
 
 ![Screenshot](img/choose-branch.jpeg)
 
-Enter `src/themes.json` into the `Go to file` text box and open the `src/themes.json` file.
+Enter `src/themes.json` into the **Go to file** text box and open the `src/themes.json` file.
 
 ![Screenshot](img/search-themes-json-branch.jpeg)
 
@@ -129,29 +132,25 @@ Click the edit icon.
 
 ![Screenshot](img/click-edit-themes-json.jpeg)
 
-> Remember:
+> **Remember:**
 >
-> A "section" is something wrapped in braces (`{}`) that can have "childs".
->
-> A "child" can be a sub-section, a number, a string (text), a boolean or an array.
->
-> An array is a list of strings, numbers, booleans or sections. An array looks like this: `["hello 1", "second string", "another string", "last string"]`
->
-> A string must always be quoted.
->
-> A name of a section is a quoted string on the left side of a colon (`:`).
+> * A "section" is something wrapped in braces (`{}`) that can have "childs".
+> * A "child" can be a sub-section, a number, a string (text), a boolean or an array.
+> * An array is a list of strings, numbers, booleans or sections. An array looks like this: `["hello 1", "second string", "another string", "last string"]`
+> * A string must always be quoted.
+> * A name of a section is a quoted string on the left side of a colon (`:`).
 
-Add your own sub-section to the `themes` section of the theme. The name of the section should be the internal name of your theme (**important!**). For example, if your theme's internal name is `nature`, the section will be named `nature`.
+Add your own sub-section to the `themes` section of the file. The name of the section should be the internal name of your theme (**important!**). For example, if your theme's internal name is `nature`, the section will be named `nature`.
 
 Your sub-section should have these childs:
 
 Child name  | Type        | Required | Description
 ----------- | ----------- | -------- | -----------
-`fullName`  | String      | Yes      | The full name of the theme
+`fullName`  | String      | Yes      | The full name of the theme.
 `bodyStyle` | Sub-section | No       | You can set the `backgroundColor` and the `color` childs to [one of these values](https://www.w3schools.com/colors/colors_names.asp) to adjust the background color and text color.
 `style`     | Sub-section | No       | You can set the `opacity` child to numbers from 0 to 1 make the game darker or lighter.
-`images`    | String      | No       | If you want to use the default images, set this to `%-default-@.png`. Otherwise, do not use this.
-`square`    | Sub-section | No       | Sets the square colors. See below
+`images`    | String      | No       | If you want to use your own images for pieces, don't set this. Otherwise, set this to `%-default-@.png`.
+`square`    | Sub-section | No       | Sets the square colors. See below.
 
 The `square` child of your sub-section should have two childs: `lightColor` and `darkColor`
 
@@ -163,10 +162,9 @@ When you're done, click `Commit changes`, enter a good message for your change (
 
 ![Screenshot](img/commit-new-theme.jpeg)
 
-### Example of adding theme
+### Example of adding a theme
 
 We start with this:
-
 ```json
 {
 	"themes": {
@@ -250,21 +248,59 @@ And we end up with this:
 }
 ```
 
-## 5. Create a pull request for our theme
+## 5. Upload your images
 
-When we commited our changes to themes.json, we have the file still open. To return back, click `Code`.
+> ***NOTE:***
+>
+> If you don't want to upload your own images (your theme section's `images` child is set to `%-default-@.png`), you can skip this step.
+
+Make sure all of your files are in a single folder on your computer as PNGs in the size of 32x32 pixels and each image has the name created from these parts separated by hyphens (`-`):
+
+1. The lowercase name of the piece without "the" ([full list of pieces](https://www.chesswinner.com/the-complete-list-of-chess-pieces-names-and-values/#:~:text=Chess%20Pieces%20Names%20and%20their%20Values%20in%20the,5%205.%20The%20queen%206%206.%20The%20king){:target=blank})
+1. The internal name of your theme
+1. The lowercase name of the player, i.e. `light` or `dark`, not `white` nor `black`
+
+When we commited our changes to themes.json, we have the file still open. To return back, click **Code** in the top left corner.
 
 ![Screenshot](img/click-code.jpeg)
 
-Click `Contribute`, then `Open pull request`.
+Enter `src/img` into the **Go to file** text box and open the `src/img` folder.
+
+![Screenshot](img/goto-folder-img.jpeg)
+
+Click **Add file**, then **Upload files**.
+
+![Screenshot](img/upload-files.jpeg)
+
+Click the **choose your files** link and navigate to the directory with all of your images. Select all of the images and click **Open**.
+
+![Screenshot](img/choose-your-files.jpeg)
+
+Wait until the images are uploaded and write a good message for our change instead of the default `Add files via upload` (for example, `Upload images for the nature theme`).
+
+Click **Commit changes**.
+
+![Screenshot](img/commit-upload.jpeg)
+
+Wait until the files are processed.
+
+## 6. Create a pull request for our theme
+
+Click **Code** in the top left corner.
+
+![Screenshot](img/click-code.jpeg)
+
+Click **Contribute**, then **Open pull request**.
 
 ![Screenshot](img/open-pr.jpeg)
 
-Click `Create pull request`.
+Click **Create pull request**.
 
 ![Screenshot](img/create-pr.jpeg)
 
-After a while, you will see that auto-checks are running and there is a `Visit Preview` link which you can use to try your theme. Please note that the right preview is the preview for `chess-no-25`, not `chess-no-25-docs`. You will also see the status which will be `Open`. When the status changes to `Closed`, it means that your new theme is declined. When the status changes to `Merged`, it means that your theme is accepted and you can find it on the [Chess No. 25 nightly version](https://chess-no-25-nightly.vercel.app){:target=blank}.
+After a while, you will see that auto-checks are running and there is a **Visit Preview** link which you can use to try your theme. Please note that the right preview is the preview for **chess-no-25**, not **chess-no-25-docs**. You will also see the status which will be **Open**. When the status changes to **Closed**, it means that your new theme is declined. When the status changes to **Merged**, it means that your theme is accepted and you can find it on the [Chess No. 25 nightly version](https://chess-no-25-nightly.vercel.app){:target=blank}.
+
+Even if the theme is declined, you can always use it on the preview link and submit another amazing themes.
 
 ![Screenshot](img/pr-created.jpeg)
 

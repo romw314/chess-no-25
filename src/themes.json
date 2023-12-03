@@ -121,6 +121,11 @@
 		},
 		"christmas": {
 			"fullName": "Christmas",
+			"avalability": {
+				"monthSeason": [
+					12
+				]
+			},
 			"bodyStyle": {
 				"backgroundColor": "deepskyblue"
 			},

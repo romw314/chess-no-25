@@ -118,6 +118,30 @@
 					"darkgreen"
 				]
 			}
-		}
+		},
+		"christmas": {
+			"fullName": "Christmas",
+			"avalability": {
+				"monthSeason": [
+					12
+				]
+			},
+			"bodyStyle": {
+				"backgroundColor": "deepskyblue"
+			},
+			"images": "%-default-@.png",
+			"square": {
+				"lightColor": [
+					"#E0FFFF",
+					"#ADD8E6",
+					"#87CEEB"
+				],
+				"darkColor": [
+					"#DC143C",
+					"#A52A2A",
+					"#D2691E"
+				]
+			}
+		}				
 	}
 }

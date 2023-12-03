@@ -112,7 +112,7 @@ Also check for other names. For example, if you are creating a theme named `Lave
 
 ## 4. Write the code for your theme
 
-Go to your forked Chess No. 25 repo and click the button that will contain something like **1 Branch** or **2 Branches**.
+Go to your forked Chess No. 25 repo and click the button that will contain something like **1 Branch** or **2 Branches**. If you don't see the text, click **Code** in the top left corner.
 
 ![Screenshot](img/open-branches.jpeg)
 

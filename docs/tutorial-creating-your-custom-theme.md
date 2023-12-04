@@ -13,17 +13,17 @@ In this guide we assume that you are using a Windows machine, but you can do the
 >
 > If you have already forked Chess No. 25, you can skip this step.
 
-To start, [sign in to GitHub](https://github.com){:target=blank} and navigate to [the Chess No. 25 repository](https://github.com/romw314/chess-no-25){:target=blank}.
+To start, [sign in to GitHub](https://github.com){:target=blank} and navigate toNo.  [the Chess No. 25 repository](https://github.com/romw314/chess-no-25){:target=blank}.
 
 You should see something like this:
 ![Screenshot](img/fork.jpeg)
 
-Click the **Fork** button.
+Click the **Fork** button. This will create your own fork (copy) of Chess No. 25 where you can make changes and then they can be accepted into the main Chess No. 25.
 
 You should see something like this:
 ![Screenshot](img/finish-fork.jpeg)
 
-Click the **Create fork** button. After a short time, it should take you into the newly created fork
+Click the **Create fork** button. After a short time, it should take you into the newly created fork.
 
 ## 2. Choose what theme do you want to create
 

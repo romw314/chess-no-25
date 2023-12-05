@@ -44,3 +44,9 @@ body:
     attributes:
       label: Custom images
       description: Drag every image into this field in the PNG format and size 32x32, named `<square color>-<piece name>.png` (lowercase; square color is `light` or `dark`). ***DO NOT PROVIDE A LINK TO AN EXTERNAL FILE SOURCE LIKE ONEDRIVE!***
+  - type: dropdown
+    attributes:
+      label: Availability
+      description: In which months the theme should be available (select all if always).
+      multiple: true
+      options: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

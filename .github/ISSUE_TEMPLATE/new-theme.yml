@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        # Extension submission
+        # Theme submission
         All colors can be one of [these color codes](https://www.w3schools.com/colors/colors_names.asp).
   - type: input
     attributes:

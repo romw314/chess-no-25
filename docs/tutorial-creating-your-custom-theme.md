@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-To create you own theme for Chess No. 25, you will need a GitHub account, a web browser and an internet connection.
+To create your own theme for Chess No. 25, you will need to have a GitHub account.
 If you don't have a GitHub account already you can [create a new one](https://github.com/signup){:target=blank}.
 
 In this guide we assume that you are using a Windows machine, but you can do the same steps on Linux or macOS (the steps may be a little different on other systems).
@@ -18,12 +18,12 @@ To start, [sign in to GitHub](https://github.com){:target=blank} and navigate to
 You should see something like this:
 ![Screenshot](img/fork.jpeg)
 
-Click the **Fork** button.
+Click the **Fork** button. This will create your own fork (copy) of Chess No. 25 where you can make changes and then they can be accepted into the main Chess No. 25.
 
 You should see something like this:
 ![Screenshot](img/finish-fork.jpeg)
 
-Click the **Create fork** button. After a short time, it should take you into the newly created fork
+Click the **Create fork** button. After a short time, it should take you into the newly created fork.
 
 ## 2. Choose what theme do you want to create
 

@@ -28,7 +28,7 @@ body:
     attributes:
       label: Light square color - POSSIBLE MOVE
       description: The color of a light square when the selected piece can move to that square
-        - type: input
+  - type: input
     attributes:
       label: Dark square color - NORMAL
       description: The normal color of the dark squares

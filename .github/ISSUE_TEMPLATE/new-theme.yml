@@ -40,3 +40,7 @@ body:
     attributes:
       label: Dark square color - POSSIBLE MOVE
       description: The color of a dark square when the selected piece can move to that square
+  - type: textarea
+    attributes:
+      label: Custom images
+      description: Drag every image into this field in the PNG format and size 32x32, named `<square color>-<piece name>.png` (lowercase; square color is `light` or `dark`). ***DO NOT PROVIDE A LINK TO AN EXTERNAL FILE SOURCE LIKE ONEDRIVE!***

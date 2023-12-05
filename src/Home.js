@@ -23,7 +23,7 @@ function HomePage() {
 		<>
 			<p>Chess No. 25 is a simple and open source chess game for two players.</p>
 			<p>Chess No. 25 has multiple themes available. <Link to="/themes">Try them now!</Link></p>
-			<p>If you found a bug or have an idea, please <a href="https://github.com/romw314/chess-no-25/issues/new/choose">report it on GitHub</a>.</p>
+			<p>If you found a bug or have an idea, please report it on GitHub: <a href="https://github.com/romw314/chess-no-25/issues/new/choose">bugs</a>, <a href="https://github.com/romw314/chess-no-25/discussions/new?category=ideas">ideas</a></p>
 		</>
 	);
 }

@@ -2,6 +2,7 @@
 	"themes": {
 		"dark": {
 			"fullName": "Dark (default)",
+			"original": true,
 			"bodyStyle": {
 				"backgroundColor": "black",
 				"color": "white"
@@ -24,10 +25,12 @@
 			}
 		},
 		"default": {
-			"fullName": "Standard"
+			"fullName": "Standard",
+			"original": true
 		},
 		"bw": {
 			"fullName": "Black & White",
+			"original": true,
 			"bodyStyle": {
 				"backgroundColor": "white",
 				"color": "black"

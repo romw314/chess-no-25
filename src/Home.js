@@ -33,19 +33,20 @@ function ThemesPage() {
 	for (const theme in themes.themes) {
 		const available = checkThemeAvailability(themes.themes[theme]);
 		if (available === false) {
-			themelist.push(<li key={theme} style={{ color: 'grey' }}>{themes.themes[theme].fullName ?? theme} (not available)</li>);
+			themelist.push(<li key={theme} style={{ color: 'grey' }}>{themes.themes[theme].fullName ?? theme}{themes.themes[theme].original ? '*' : ''} (not available)</li>);
 			continue;
 		}
 		let style = {};
 		if (available) // empty string '' if falsy
 			style.color = 'green';
-		themelist.push(<li className={styles.themeLink} key={theme}><Link to={`/play/?theme=${theme}`} style={style}>{themes.themes[theme].fullName ?? theme}</Link><strong>{available}</strong></li>);
+		themelist.push(<li className={styles.themeLink} key={theme}><Link to={`/play/?theme=${theme}`} style={style}>{themes.themes[theme].fullName ?? theme}</Link>{themes.themes[theme].original ? '*' : ''}<strong>{available}</strong></li>);
 	}
 	return (
 		<>
 			<p>Please choose a theme:</p>
 			<ul>{themelist}</ul>
-			<p><a href="https://chess-no-25-docs.vercel.app/tutorial-creating-your-custom-theme/" rel="noopener" target="blank">Create your own</a></p>
+			<p>The themes are created by the community. <a href="https://chess-no-25-docs.vercel.app/tutorial-creating-your-custom-theme/" rel="noopener" target="blank">Create your own theme.</a></p>
+			<p>*Theme from the base set by romw314</p>
 		</>
 	);
 }

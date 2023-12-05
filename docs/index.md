@@ -11,7 +11,7 @@ You can play some versions of Chess No. 25:
 
 ## GitHub Pages or Vercel
 
-Chess No. 25 was originally deployed on GitHub Pages, but Vercel supports more configuration, preview deployments and up to 50 custom subdomains for every project so I recommend you to use Vercel. **The GitHub Pages version may stop working any time!**
+Chess No. 25 was originally deployed on GitHub Pages, but Vercel supports more configuration, preview deployments and up to 50 custom subdomains for every project so I use Vercel (and you should use Chess No. 25 on Vercel). **The GitHub Pages version may stop working any time!**
 
 The GitHub pages site may not work. If you have links to the GitHub Pages version of Chess No. 25 on your website or social media, please update them to the Vercel version.
 

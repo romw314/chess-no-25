@@ -7,6 +7,12 @@ If you don't have a GitHub account already you can [create a new one](https://gi
 
 In this guide we assume that you are using a Windows machine, but you can do the same steps on Linux or macOS (the steps may be a little different on other systems).
 
+Want to create a theme _without coding_? Do it [here](https://github.com/romw314/chess-no-25/issues/new/choose){:target=blank} (takes less time to you, but will take longer to be accepted into Chess No. 25).
+
+Already know what's JSON? Great! You may skip some parts of this tutorial and even [make this tutorial better for beginners](https://github.com/romw314/chess-no-25/edit/master/docs/tutorial-creating-your-custom-theme.md){:target=blank}.
+
+Know the basics about Git and Node.js? Great! You can do these changes locally in your favorite editor and run unit tests with `yarn test` before committing, optionally try the theme with `yarn start`.
+
 ## 1. Fork Chess No. 25
 
 > ***NOTE:***

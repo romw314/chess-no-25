@@ -1,6 +1,6 @@
 name: New theme 🎨
 description: Submit a new theme in to Chess No. 25 without coding
-title: New theme: <theme name>
+title: "New theme: <theme name>"
 labels: ["new theme"]
 body:
   - type: markdown

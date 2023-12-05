@@ -142,6 +142,30 @@
 					"#D2691E"
 				]
 			}
-		}				
+		},
+		"christmasDark": {
+			"fullName": "Christmas Dark",
+			"availability": {
+				"monthSeason": [
+					"December"
+				]
+			},
+			"bodyStyle": {
+				"backgroundColor": "#007AAA"
+			},
+			"images": "%-default-@.png",
+			"square": {
+				"lightColor": [
+					"#90AAAA",
+					"#688492",
+					"#87CEEB"
+				],
+				"darkColor": [
+					"#AA073C",
+					"#A52A2A",
+					"#D2691E"
+				]
+			}
+		}
 	}
 }

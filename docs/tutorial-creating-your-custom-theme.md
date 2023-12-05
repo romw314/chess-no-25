@@ -13,7 +13,7 @@ In this guide we assume that you are using a Windows machine, but you can do the
 >
 > If you have already forked Chess No. 25, you can skip this step.
 
-To start, [sign in to GitHub](https://github.com){:target=blank} and navigate to  [the Chess No. 25 repository](https://github.com/romw314/chess-no-25){:target=blank}.
+To start, [sign in to GitHub](https://github.com){:target=blank} and navigate to [the Chess No. 25 repository](https://github.com/romw314/chess-no-25){:target=blank}.
 
 You should see something like this:
 ![Screenshot](img/fork.jpeg)

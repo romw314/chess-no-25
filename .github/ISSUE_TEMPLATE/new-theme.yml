@@ -1,0 +1,42 @@
+name: New theme 🎨
+description: Submit a new theme in to Chess No. 25 without coding
+title: New theme: <theme name>
+labels: ["new theme"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Extension submission
+        All colors can be one of [these color codes](https://www.w3schools.com/colors/colors_names.asp).
+  - type: input
+    attributes:
+      label: Background color
+      description: The background color of the chess (will set the colors attribute)
+  - type: input
+    attributes:
+      label: Text color
+      description: The text color of the coordinates and the "X to move" text
+  - type: input
+    attributes:
+      label: Light square color - NORMAL
+      description: The normal color of the light squares
+  - type: input
+    attributes:
+      label: Light square color - SELECTED
+      description: The color when there is a selected piece an a light square
+  - type: input
+    attributes:
+      label: Light square color - POSSIBLE MOVE
+      description: The color of a light square when the selected piece can move to that square
+        - type: input
+    attributes:
+      label: Dark square color - NORMAL
+      description: The normal color of the dark squares
+  - type: input
+    attributes:
+      label: Dark square color - SELECTED
+      description: The color when there is a selected piece an a dark square
+  - type: input
+    attributes:
+      label: Dark square color - POSSIBLE MOVE
+      description: The color of a dark square when the selected piece can move to that square

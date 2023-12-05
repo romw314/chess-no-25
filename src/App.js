@@ -48,7 +48,7 @@ function Square({ currentMove, value, onSquareClick, selectedPiece, index, theme
 	// eslint-disable-next-line no-eval
 	value = window.sqValue ? eval(window.sqValue) : getImage(value);
 
-	return <button className={`${styles.unselectable} ${styles.square}`} onClick={onSquareClick} style={style} data-testid={testid}>{value}</button>;
+	return <button title={`${Array.from('ABCDEFGH')[index % 8]}${Math.floor(index / 8)}`} className={`${styles.unselectable} ${styles.square}`} onClick={onSquareClick} style={style} data-testid={testid}>{value}</button>;
 }
 
 function BoardRow({ move, index, onSquareClick, squares, selectedPiece, theme }) {
@@ -56,6 +56,7 @@ function BoardRow({ move, index, onSquareClick, squares, selectedPiece, theme })
 	index *= 8;
 	return (
 		<div className={styles.boardRow}>
+			<span className={styles.square} style={{ width: 48, height: 48 }}>{8-rowIndex}</span>
 			<Square value={squares[index+0]} onSquareClick={() => onSquareClick(index+0)} selectedPiece={selectedPiece} index={index+0} theme={theme} squares={squares} testid={`0/${rowIndex}`} currentMove={move} />
 			<Square value={squares[index+1]} onSquareClick={() => onSquareClick(index+1)} selectedPiece={selectedPiece} index={index+1} theme={theme} squares={squares} testid={`1/${rowIndex}`} currentMove={move} />
 			<Square value={squares[index+2]} onSquareClick={() => onSquareClick(index+2)} selectedPiece={selectedPiece} index={index+2} theme={theme} squares={squares} testid={`2/${rowIndex}`} currentMove={move} />
@@ -155,6 +156,10 @@ function Board({ theme, data, onPlay, onRevert }) {
 			<BoardRow index='5' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
 			<BoardRow index='6' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
 			<BoardRow index='7' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
+			<div className={styles.boardRow}>
+				<span className={styles.square} style={{ width: 48, height: 48 }} />
+				{Array.from('ABCDEFGH').map(ch => <span className={styles.square} style={{ width: 48, height: 48 }}>{ch}</span>)}
+			</div>
 		</Box>
 	);
 }

@@ -150,13 +150,14 @@ Add your own sub-section to the `themes` section of the file. The name of the se
 
 Your sub-section should have these childs:
 
-Child name  | Type        | Required | Description
------------ | ----------- | -------- | -----------
-`fullName`  | String      | Yes      | The full name of the theme.
-`bodyStyle` | Sub-section | No       | You can set the `backgroundColor` and the `color` childs to [one of these values](https://www.w3schools.com/colors/colors_names.asp) to adjust the background color and text color.
-`style`     | Sub-section | No       | You can set the `opacity` child to numbers from 0 to 1 make the game darker or lighter.
-`images`    | String      | No       | If you want to use your own images for pieces, don't set this. Otherwise, set this to `%-default-@.png`.
-`square`    | Sub-section | No       | Sets the square colors. See below.
+Child name     | Type        | Required | Description
+-------------- | ----------- | -------- | -----------
+`fullName`     | String      | Yes      | The full name of the theme.
+`bodyStyle`    | Sub-section | No       | You can set the `backgroundColor` and the `color` childs to [one of these values](https://www.w3schools.com/colors/colors_names.asp) to adjust the background color and text color.
+`style`        | Sub-section | No       | You can set the `opacity` child to numbers from 0 to 1 make the game darker or lighter.
+`images`       | String      | No       | If you want to use your own images for pieces, don't set this. Otherwise, set this to `%-default-@.png`.
+`square`       | Sub-section | No       | Sets the square colors. See below.
+`availability` | Sub-section | No       | Set the `monthSeason` child to an array of month names in which the theme should be available (for seasonal themes)
 
 The `square` child of your sub-section should have two childs: `lightColor` and `darkColor`
 
@@ -233,6 +234,16 @@ And we end up with this:
 		}
 		"nature": {
 			"fullName": "Nature",
+			"availability": {
+				"monthSeason": [
+					"April",
+					"May",
+					"June",
+					"July",
+					"August",
+					"September"
+				]
+			},
 			"bodyStyle": {
 				"backgroundColor": "lightgreen"
 			},
@@ -291,6 +302,8 @@ Click **Commit changes**.
 Wait until the files are processed.
 
 ## 6. Create a pull request for our theme
+
+A pull request is that we _request_ the author of Chess No. 25 to _pull_ or _merge_ our changes into the main Chess No. 25.
 
 Click **Code** in the top left corner.
 

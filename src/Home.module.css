@@ -1,2 +1,11 @@
 .home {
 }
+
+.themeLink a {
+	text-decoration: none;
+	color: blue;
+}
+
+.themeLink:hover a {
+	text-decoration: underline;
+}

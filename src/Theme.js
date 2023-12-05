@@ -69,5 +69,30 @@ function Theme(themeId, logrun) {
 	return result;
 }
 
-export { Theme, getImage, pieceIs };
+function checkThemeAvailability(theme) {
+	if (!theme)
+		return false;
+	const av = theme.availability ?? { always: true };
+	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+	const now = new Date();
+	if (av.monthSeason)
+		for (const month of av.monthSeason)
+			if (months.includes(month) && new Date(`0 ${month}`).getMonth() === now.getMonth()) {
+				const joinWithCommas = av.monthSeason.slice();
+				const last = joinWithCommas.pop();
+				return ` - Special theme: available only in ${joinWithCommas.join(', ')}${joinWithCommas.length ? ' and ' : ''}${last}`;
+			}
+	if (av.daySeason)
+		for (const dateString of av.dateSeason) {
+			const dateStringParts = dateString.split(' ');
+			if (dateStringParts.length !== 2 || isNaN(Number(dateStringParts[0])) || !months.includes(dateStringParts[1]))
+				continue;
+			const date = new Date(dateString);
+			if (date.getDay() === now.getDay() && date.getMonth === now.getMonth())
+				return ` - Special theme: available only on ${dateString}`;
+		}
+	return av.always ? '' : false;
+}
+
+export { Theme, getImage, pieceIs, checkThemeAvailability };
 export default ThemeData;

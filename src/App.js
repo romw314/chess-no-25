@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
-import { Theme, getImage } from './Theme';
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
+import { Theme, getImage, checkThemeAvailability } from './Theme';
 import * as gameLogic from './gameLogic.js';
 import styles from './App.module.css';
 import { DebugRunContext, getLg } from './DebugRunContext';
@@ -9,6 +9,7 @@ import clone from 'just-clone';
 import Columns from 'react-columns';
 import NavBar from './NavBar';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import themes from './themes.json';
 
 function Square({ currentMove, value, onSquareClick, selectedPiece, index, theme, squares, testid }) {
 	const isDark = ((Math.floor(index / 8) % 2) !== (index % 2));
@@ -145,7 +146,7 @@ function Board({ theme, data, onPlay, onRevert }) {
 	window.chess.advanced = data;
 
 	return (
-		<div className={styles.board} style={theme.board.style}>
+		<Box sx={{ flexGrow: 1, boxShadow: 2 }} className={styles.board} style={theme.board.style}>
 			<BoardRow index='0' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
 			<BoardRow index='1' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
 			<BoardRow index='2' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
@@ -154,7 +155,7 @@ function Board({ theme, data, onPlay, onRevert }) {
 			<BoardRow index='5' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
 			<BoardRow index='6' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
 			<BoardRow index='7' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
-		</div>
+		</Box>
 	);
 }
 
@@ -372,7 +373,16 @@ class setupData {
 
 function ThemedApp() {
 	const [params] = useSearchParams();
-	return <App setupData={new setupData(Theme(params.get('theme') ?? 'dark', getLg))} navigate={useNavigate()} />;
+	const theme = params.get('theme') ?? 'dark';
+	const navigate = useNavigate();
+	if (checkThemeAvailability(themes.themes[theme]) === false)
+		return (
+			<>
+				<NavBar onNavigate={navigate} />
+				<span>Sorry, this theme is not available</span>
+			</>
+		);
+	return <App setupData={new setupData(Theme(theme, getLg))} navigate={navigate} />;
 }
 
 function createHistoryObject(squares) {

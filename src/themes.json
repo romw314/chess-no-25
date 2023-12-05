@@ -121,9 +121,9 @@
 		},
 		"christmas": {
 			"fullName": "Christmas",
-			"avalability": {
+			"availability": {
 				"monthSeason": [
-					12
+					"December"
 				]
 			},
 			"bodyStyle": {

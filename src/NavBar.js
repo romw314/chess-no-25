@@ -15,7 +15,7 @@ function NavButton({ to, href, children }) {
 
 function NavBar({ onNavigate, children }) {
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box sx={{ flexGrow: 1, boxShadow: 112 }}>
 			<AppBar position="sticky">
 				<Toolbar>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

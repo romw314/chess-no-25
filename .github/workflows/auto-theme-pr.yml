@@ -32,7 +32,10 @@ jobs:
       with:
         node-version: 18
     - name: Make the change
-      run: node scripts/add-new-theme.cjs "$THEMEINFO"
+      run: |
+        node scripts/add-new-theme.cjs "$THEMEINFO"
+        echo '=============================='
+        cat themes.new.json | jq . | tee src/themes.json
       env:
         THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
     - name: Configure Git
@@ -41,7 +44,7 @@ jobs:
         GNAME: ${{ github.actor }}
         GEMAIL: ${{ github.actor }}@users.noreply.github.com
     - name: Commit
-      run: git add hello.json && git commit -m"Automated theme submission for issue #${{ github.event.issue.number }}"
+      run: git add src/themes.json && git commit -m"Automated theme submission for issue #${{ github.event.issue.number }}"
     - name: Push
       run: git push -u origin ${{ steps.branch.outputs.name }}
     - name: Create PR
@@ -57,4 +60,4 @@ jobs:
         gh issue comment ${{ github.event.issue.number }} --body \
           "Thanks for taking the time to submit a theme to Chess No. 25! \
           It's automatically converted to a pull request and you can [track it's status here](${{ steps.pr.outputs.url }}). \
-          The theme should be checked in up to 5 days (may take even 2 months or longer)."
+          The theme should be checked in up to 5 days (may take even 2 months or longer sometimes)."

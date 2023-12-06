@@ -21,5 +21,5 @@ const themeObj = {
 };
 console.log('theme obj:', themeObj);
 themesObj.themes[themeRaw.name] = themeObj;
-fs.writeFileSync('themes.new.json', themesObj);
+fs.writeFileSync('themes.new.json', JSON.stringify(themesObj));
 process.exit(1);

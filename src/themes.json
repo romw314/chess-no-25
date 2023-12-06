@@ -1,174 +1,201 @@
 {
-	"themes": {
-		"dark": {
-			"fullName": "Dark (default)",
-			"original": true,
-			"bodyStyle": {
-				"backgroundColor": "black",
-				"color": "white"
-			},
-			"style": {
-				"opacity": "0.8"
-			},
-			"images": "%-default-@.png",
-			"square": {
-				"lightColor": [
-					"#333333",
-					"darkgreen",
-					"orange"
-				],
-				"darkColor": [
-					"#111111",
-					"darkgreen",
-					"darkred"
-				]
-			}
-		},
-		"default": {
-			"fullName": "Standard",
-			"original": true
-		},
-		"bw": {
-			"fullName": "Black & White",
-			"original": true,
-			"bodyStyle": {
-				"backgroundColor": "white",
-				"color": "black"
-			},
-			"square": {
-				"lightColor": [
-					"white",
-					"black",
-					"black"
-				],
-				"darkColor": [
-					"black",
-					"white",
-					"white"
-				]
-			}
-		},
-		"lava": {
-			"fullName": "Lava",
-			"bodyStyle": {
-				"backgroundColor": "red",
-				"color": "white"
-			},
-			"images": "%-default-@.png",
-			"square": {
-				"lightColor": [
-					"orange",
-					"red",
-					"yellow"
-				],
-				"darkColor": [
-					"darkred",
-					"red",
-					"#690000"
-				]
-			}
-		},
-		"secret": {
-			"fullName": "Secret",
-			"images": "%-default-@.png",
-			"square": {
-				"lightColor": [
-					"black",
-					"black",
-					"black"
-				],
-				"darkColor": [
-					"black",
-					"black",
-					"black"
-				]
-			}
-		},
-		"green": {
-			"fullName": "Green",
-			"bodyStyle": {
-				"backgroundColor": "#DDFFDD"
-			},
-			"images": "%-default-@.png",
-			"square": {
-				"lightColor": [
-					"lightgreen",
-					"green",
-					"#CCFFCC"
-				],
-				"darkColor": [
-					"darkgreen",
-					"green",
-					"#003400"
-				]
-			}
-		},
-		"lv": {
-			"fullName": "Lavender & Vanilla",
-			"bodyStyle": {
-				"backgroundColor": "#F3E5AB"
-			},
-			"images": "%-default-@.png",
-			"square": {
-				"lightColor": [
-					"lavender",
-					"violet",
-					"orange"
-				],
-				"darkColor": [
-					"darkviolet",
-					"violet",
-					"darkgreen"
-				]
-			}
-		},
-		"christmas": {
-			"fullName": "Christmas",
-			"availability": {
-				"monthSeason": [
-					"December"
-				]
-			},
-			"bodyStyle": {
-				"backgroundColor": "deepskyblue"
-			},
-			"images": "%-default-@.png",
-			"square": {
-				"lightColor": [
-					"#E0FFFF",
-					"#ADD8E6",
-					"#87CEEB"
-				],
-				"darkColor": [
-					"#DC143C",
-					"#A52A2A",
-					"#D2691E"
-				]
-			}
-		},
-		"christmasDark": {
-			"fullName": "Christmas Dark",
-			"availability": {
-				"monthSeason": [
-					"December"
-				]
-			},
-			"bodyStyle": {
-				"backgroundColor": "#007AAA"
-			},
-			"images": "%-default-@.png",
-			"square": {
-				"lightColor": [
-					"#90AAAA",
-					"#688492",
-					"#87CEEB"
-				],
-				"darkColor": [
-					"#AA073C",
-					"#A52A2A",
-					"#D2691E"
-				]
-			}
-		}
-	}
+  "themes": {
+    "dark": {
+      "fullName": "Dark (default)",
+      "original": true,
+      "bodyStyle": {
+        "backgroundColor": "black",
+        "color": "white"
+      },
+      "style": {
+        "opacity": "0.8"
+      },
+      "images": "%-default-@.png",
+      "square": {
+        "lightColor": [
+          "#333333",
+          "darkgreen",
+          "orange"
+        ],
+        "darkColor": [
+          "#111111",
+          "darkgreen",
+          "darkred"
+        ]
+      }
+    },
+    "default": {
+      "fullName": "Standard",
+      "original": true
+    },
+    "bw": {
+      "fullName": "Black & White",
+      "original": true,
+      "bodyStyle": {
+        "backgroundColor": "white",
+        "color": "black"
+      },
+      "square": {
+        "lightColor": [
+          "white",
+          "black",
+          "black"
+        ],
+        "darkColor": [
+          "black",
+          "white",
+          "white"
+        ]
+      }
+    },
+    "lava": {
+      "fullName": "Lava",
+      "bodyStyle": {
+        "backgroundColor": "red",
+        "color": "white"
+      },
+      "images": "%-default-@.png",
+      "square": {
+        "lightColor": [
+          "orange",
+          "red",
+          "yellow"
+        ],
+        "darkColor": [
+          "darkred",
+          "red",
+          "#690000"
+        ]
+      }
+    },
+    "secret": {
+      "fullName": "Secret",
+      "images": "%-default-@.png",
+      "square": {
+        "lightColor": [
+          "black",
+          "black",
+          "black"
+        ],
+        "darkColor": [
+          "black",
+          "black",
+          "black"
+        ]
+      }
+    },
+    "green": {
+      "fullName": "Green",
+      "bodyStyle": {
+        "backgroundColor": "#DDFFDD"
+      },
+      "images": "%-default-@.png",
+      "square": {
+        "lightColor": [
+          "lightgreen",
+          "green",
+          "#CCFFCC"
+        ],
+        "darkColor": [
+          "darkgreen",
+          "green",
+          "#003400"
+        ]
+      }
+    },
+    "lv": {
+      "fullName": "Lavender & Vanilla",
+      "bodyStyle": {
+        "backgroundColor": "#F3E5AB"
+      },
+      "images": "%-default-@.png",
+      "square": {
+        "lightColor": [
+          "lavender",
+          "violet",
+          "orange"
+        ],
+        "darkColor": [
+          "darkviolet",
+          "violet",
+          "darkgreen"
+        ]
+      }
+    },
+    "christmas": {
+      "fullName": "Christmas",
+      "availability": {
+        "monthSeason": [
+          "December"
+        ]
+      },
+      "bodyStyle": {
+        "backgroundColor": "deepskyblue"
+      },
+      "images": "%-default-@.png",
+      "square": {
+        "lightColor": [
+          "#E0FFFF",
+          "#ADD8E6",
+          "#87CEEB"
+        ],
+        "darkColor": [
+          "#DC143C",
+          "#A52A2A",
+          "#D2691E"
+        ]
+      }
+    },
+    "christmasDark": {
+      "fullName": "Christmas Dark",
+      "availability": {
+        "monthSeason": [
+          "December"
+        ]
+      },
+      "bodyStyle": {
+        "backgroundColor": "#007AAA"
+      },
+      "images": "%-default-@.png",
+      "square": {
+        "lightColor": [
+          "#90AAAA",
+          "#688492",
+          "#87CEEB"
+        ],
+        "darkColor": [
+          "#AA073C",
+          "#A52A2A",
+          "#D2691E"
+        ]
+      }
+    },
+    "winter": {
+      "fullName": "Winter",
+      "availability": {
+        "monthSeason": [
+          "January",
+          "February",
+          "December"
+        ]
+      },
+      "bodyStyle": {
+        "backgroundColor": "midnightblue",
+        "color": "oldlace"
+      },
+      "images": "%-default-@.png",
+      "squares": {
+        "lightColor": [
+          "silver",
+          "thistle",
+          "violet"
+        ],
+        "darkColor": [
+          "steelblue",
+          "indigo",
+          "turquoise"
+        ]
+      }
+    }
+  }
 }

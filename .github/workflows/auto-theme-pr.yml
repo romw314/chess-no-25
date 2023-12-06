@@ -45,8 +45,16 @@ jobs:
     - name: Push
       run: git push -u origin ${{ steps.branch.outputs.name }}
     - name: Create PR
-      run: gh pr create --title "$TITLE" --body "$BODY"
+      id: pr
+      run: echo "url=$(gh pr create --title "$TITLE" --body "$BODY")" >> "$GITHUB_OUTPUT"
       env:
         TITLE: ${{ github.event.issue.title }}
         BODY: ${{ github.event.issue.body }}
         GH_TOKEN: ${{ github.token }}
+    - name: Close and comment on issue
+      run: |
+        gh issue close ${{ github.event.issue.number }}
+        gh issue comment ${{ github.event.issue.number }} --body \
+          "Thanks for taking the time to submit a theme to Chess No. 25! \
+          It's automatically converted to a pull request and you can [track it's status here](${{ steps.pr.outputs.url }}). \
+          The theme should be checked in up to 5 days (may take even 2 months or longer)."

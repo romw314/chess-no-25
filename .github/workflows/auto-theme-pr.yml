@@ -11,7 +11,7 @@ jobs:
       issues: write
       contents: write
       pull-requests: write
-    if: ${{ github.event.issue.state == 'open' && contains(github.event.issue.labels.*.name, 'hello') }}
+    if: ${{ github.event.issue.state == 'open' && contains(github.event.issue.labels.*.name, 'new theme') }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2.7.0

@@ -1,4 +1,6 @@
+const fs = require('fs');
 const themeRaw = JSON.parse(process.argv[2]);
+let themesObj = JSON.parse(fs.readFileSync('src/themes.json', 'utf8'));
 const _undef = undefined; // can be either null of undefined
 console.log('theme raw:', themeRaw);
 const av = themeRaw.availability.split(', ');
@@ -18,4 +20,6 @@ const themeObj = {
 	}
 };
 console.log('theme obj:', themeObj);
+themesObj.themes[themeRaw.name] = themeObj;
+fs.writeFileSync('themes.new.json', themesObj);
 process.exit(1);

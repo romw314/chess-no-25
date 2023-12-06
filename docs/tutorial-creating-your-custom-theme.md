@@ -155,11 +155,11 @@ Your child should be an object and should have these childs:
 Child name     | Type   | Required | Description
 -------------- | ------ | -------- | -----------
 `fullName`     | String | Yes      | The full name of the theme.
+`availability` | Object | No       | Set the `monthSeason` child to an array of month names in which the theme should be available (for seasonal themes), e.g. `["January", "February"]`.
 `bodyStyle`    | Object | No       | You can set the `backgroundColor` and the `color` childs to [one of these values](https://www.w3schools.com/colors/colors_names.asp) to adjust the background color and text color.
 `style`        | Object | No       | You can set the `opacity` child to numbers from 0 to 1 make the game darker or lighter.
 `images`       | String | No       | If you want to use your own images for pieces, don't set this. Otherwise, set this to `%-default-@.png`.
 `square`       | Object | No       | Sets the square colors. See below.
-`availability` | Object | No       | Set the `monthSeason` child to an array of month names in which the theme should be available (for seasonal themes), e.g. `["January", "February"]`.
 
 The `square` child of your theme object should have two childs: `lightColor` and `darkColor`
 

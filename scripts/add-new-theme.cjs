@@ -3,9 +3,9 @@ const _undef = undefined; // can be either null of undefined
 console.log('theme raw:', themeRaw);
 const themeObj = {
 	fullName: themeRaw.fullName,
-	availability: ([...themeRaw.availability].length === 12) ? {
+	availability: ([...themeRaw.availability].length === 12) ? _undef :{
 		monthSeason: [...themeRaw.availability]
-	} : _undef,
+	},
 	bodyStyle: {
 		backgroundColor: themeRaw.bgcolor,
 		color: themeRaw.color

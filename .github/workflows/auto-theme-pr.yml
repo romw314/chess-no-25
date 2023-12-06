@@ -1,0 +1,52 @@
+name: Automated theme submission
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: write
+      pull-requests: write
+    if: ${{ github.event.issue.state == 'open' && contains(github.event.issue.labels.*.name, 'hello') }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.7.0
+    - name: New branch
+      id: branch
+      run: |
+        git branch themes/${{ github.event.issue.number }}
+        git switch themes/${{ github.event.issue.number }}
+        echo "name=themes/${{ github.event.issue.number }}" >> "$GITHUB_OUTPUT"
+    - name: Read body
+      id: parse
+      uses: edumserrano/github-issue-forms-parser@v1
+      with:
+        template-filepath: .github/ISSUE_TEMPLATE/new-theme.yml
+        issue-form-body: ${{ github.event.issue.body }}
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Make the change
+      run: node scripts/add-new-theme.cjs "$THEMEINFO"
+      env:
+        THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
+    - name: Configure Git
+      run: git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL"
+      env:
+        GNAME: ${{ github.actor }}
+        GEMAIL: ${{ github.actor }}@users.noreply.github.com
+    - name: Commit
+      run: git add hello.json && git commit -m"Automatic hello.json update"
+    - name: Push
+      run: git push -u origin ${{ steps.branch.outputs.name }}
+    - name: Create PR
+      run: gh pr create --title "$TITLE" --body "$BODY"
+      env:
+        TITLE: ${{ github.event.issue.title }}
+        BODY: ${{ github.event.issue.body }}
+        GH_TOKEN: ${{ github.token }}

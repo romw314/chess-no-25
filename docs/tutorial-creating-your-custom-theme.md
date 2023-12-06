@@ -1,5 +1,13 @@
 # Tutorial: Creating your custom theme for Chess No. 25
 
+Want to create a theme _without coding_? Do it [here](https://github.com/romw314/chess-no-25/issues/new/choose){:target=blank} (takes less time to you, but will take longer to be accepted into Chess No. 25).
+
+Already know what's JSON? Great! You may skip some parts of this tutorial and even [make this tutorial better for beginners](https://github.com/romw314/chess-no-25/edit/master/docs/tutorial-creating-your-custom-theme.md){:target=blank}.
+
+Know the basics about Git and Node.js? Great! You can do these changes locally in your favorite editor and run unit tests with `yarn test` before committing, optionally try the theme with `yarn start`.
+
+Creating seasonal themes that are not available when you are creating them is not recommended as you can't try the theme and it can't be accepted until it can be tested.
+
 ## Prerequisites
 
 To create your own theme for Chess No. 25, you will need to have a GitHub account.
@@ -7,15 +15,9 @@ If you don't have a GitHub account already you can [create a new one](https://gi
 
 In this guide we assume that you are using a Windows machine, but you can do the same steps on Linux or macOS (the steps may be a little different on other systems).
 
-Want to create a theme _without coding_? Do it [here](https://github.com/romw314/chess-no-25/issues/new/choose){:target=blank} (takes less time to you, but will take longer to be accepted into Chess No. 25).
-
-Already know what's JSON? Great! You may skip some parts of this tutorial and even [make this tutorial better for beginners](https://github.com/romw314/chess-no-25/edit/master/docs/tutorial-creating-your-custom-theme.md){:target=blank}.
-
-Know the basics about Git and Node.js? Great! You can do these changes locally in your favorite editor and run unit tests with `yarn test` before committing, optionally try the theme with `yarn start`.
-
 ## 1. Fork Chess No. 25
 
-> ***NOTE:***
+> **Note:**
 >
 > If you have already forked Chess No. 25, you can skip this step.
 
@@ -83,7 +85,7 @@ When the file opens, you should see something like this:
 }
 ```
 
-So, let's explain the code. The code is spliited into "sections". The root section does not have a name. A section looks like this:
+So, let's explain the code. The code is spliited into "objects". The root object does not have a name. An object looks like this:
 
 ```json
 {
@@ -97,28 +99,28 @@ So, let's explain the code. The code is spliited into "sections". The root secti
 }
 ```
 
-Every section has it's "childs". A child can be a string (text) wrapped in double quotes, a number, a boolean (`true` or `false`) or a sub-section. The section above has two childs: `a`, and `b`. `a` is a number, `b` is a sub-section which has two childs:
+Every object has it's "childs". A child can be a string (text) wrapped in double quotes, a number, a boolean (`true` or `false`) or a nested object. The object above has two childs: `a`, and `b`. `a` is a number, `b` is an object which has two childs:
 
 * `a` - a string
-* `b` - a sub-section (because it's a child of `b`, we'll call it `b.b`)
+* `b` - an object (because it's a child of `b`, we'll call it `b.b`)
 
 Please note that `2` and `"2"` are diferrent. `2` is a number while `"2"` is a string.
 
-A child can also be an array (a list of strings, numbers, booleans or sections).
+A child can also be an array (a list of strings, numbers, booleans or objects).
 
 In our example, `b.b.a` is a boolean (`true`).
 
-In our themes.json, the root section has only one child - the `themes` section.
+In our themes.json, the root object has only one child - the `themes` object.
 
-Each theme is a child of the `themes` section. For example, the dark theme (with full name `Dark` and internal name `dark`) is in the `themes.dark` section (not `themes.Dark`) and it's full name is in `themes.dark.fullName`.
+Each theme is a child of the `themes` object. For example, the dark theme (with full name `Dark` and internal name `dark`) is in the `themes.dark` object (not `themes.Dark`) and it's full name is in `themes.dark.fullName`.
 
-Check if the `themes` section in the GitHub repository has a child with name same as the internal name of your theme.
+Check if the `themes` object in the GitHub repository has a child with name same as the internal name of your theme.
 
 Also check for other names. For example, if you are creating a theme named `Lavender & Vanilla` with internal name `lavenderVanilla`. Also check for themes named something like `lavenderAndVanilla`, `lavenderPlusVanilla`, `lv` or `vanillaLavender`.
 
 ## 4. Write the code for your theme
 
-Go to your forked Chess No. 25 repo and click the button that will contain something like **1 Branch** or **2 Branches**. If you don't see the text, click **Code** in the top left corner.
+Go to your forked Chess No. 25 repo and click the button that will contain something like **1 Branch** or **2 Branches**. If you don't see the text, click **Code** in the top left corner before.
 
 ![Screenshot](img/open-branches.jpeg)
 
@@ -140,26 +142,26 @@ Click the edit icon.
 
 > **Remember:**
 >
-> * A "section" is something wrapped in braces (`{}`) that can have "childs".
-> * A "child" can be a sub-section, a number, a string (text), a boolean or an array.
-> * An array is a list of strings, numbers, booleans or sections. An array looks like this: `["hello 1", "second string", "another string", "last string"]`
+> * An "object" is something wrapped in braces (`{}`) that can have "childs".
+> * A "child" can be an object, a number, a string (text), a boolean or an array.
+> * An array is a list of strings, numbers, booleans or objects. An array looks like this: `["hello 1", "second string", "another string", "last string"]`
 > * A string must always be quoted.
-> * A name of a section is a quoted string on the left side of a colon (`:`).
+> * A name of a child is a quoted string on the left side of a colon (`:`).
 
-Add your own sub-section to the `themes` section of the file. The name of the section should be the internal name of your theme (**important!**). For example, if your theme's internal name is `nature`, the section will be named `nature`.
+Add your own child to the `themes` child object of the file. The name of the child should be the internal name of your theme (**important!**). For example, if your theme's internal name is `nature`, the child will be named `nature`.
 
-Your sub-section should have these childs:
+Your child should be an object and should have these childs:
 
-Child name     | Type        | Required | Description
--------------- | ----------- | -------- | -----------
-`fullName`     | String      | Yes      | The full name of the theme.
-`bodyStyle`    | Sub-section | No       | You can set the `backgroundColor` and the `color` childs to [one of these values](https://www.w3schools.com/colors/colors_names.asp) to adjust the background color and text color.
-`style`        | Sub-section | No       | You can set the `opacity` child to numbers from 0 to 1 make the game darker or lighter.
-`images`       | String      | No       | If you want to use your own images for pieces, don't set this. Otherwise, set this to `%-default-@.png`.
-`square`       | Sub-section | No       | Sets the square colors. See below.
-`availability` | Sub-section | No       | Set the `monthSeason` child to an array of month names in which the theme should be available (for seasonal themes)
+Child name     | Type   | Required | Description
+-------------- | ------ | -------- | -----------
+`fullName`     | String | Yes      | The full name of the theme.
+`bodyStyle`    | Object | No       | You can set the `backgroundColor` and the `color` childs to [one of these values](https://www.w3schools.com/colors/colors_names.asp) to adjust the background color and text color.
+`style`        | Object | No       | You can set the `opacity` child to numbers from 0 to 1 make the game darker or lighter.
+`images`       | String | No       | If you want to use your own images for pieces, don't set this. Otherwise, set this to `%-default-@.png`.
+`square`       | Object | No       | Sets the square colors. See below.
+`availability` | Object | No       | Set the `monthSeason` child to an array of month names in which the theme should be available (for seasonal themes), e.g. `["January", "February"]`.
 
-The `square` child of your sub-section should have two childs: `lightColor` and `darkColor`
+The `square` child of your theme object should have two childs: `lightColor` and `darkColor`
 
 `square.lightColor` defines the colors of light (white) squares and `square.darkColor` defines the colors of dark (black) squares.
 
@@ -267,9 +269,9 @@ And we end up with this:
 
 ## 5. Upload your images
 
-> ***NOTE:***
+> **Note:**
 >
-> If you don't want to upload your own images (your theme section's `images` child is set to `%-default-@.png`), you can skip this step.
+> If you don't want to upload your own images (your theme object's `images` child is set to `%-default-@.png`), you can and should skip this step.
 
 Make sure all of your files are in a single folder on your computer as PNGs in the size of 32x32 pixels and each image has the name created from these parts separated by hyphens (`-`):
 
@@ -303,7 +305,7 @@ Wait until the files are processed.
 
 ## 6. Create a pull request for our theme
 
-A pull request is that we _request_ the author of Chess No. 25 to _pull_ or _merge_ our changes into the main Chess No. 25.
+A pull request is that we _request_ the author of Chess No. 25 to _pull_ (_merge_) our changes into the main Chess No. 25.
 
 Click **Code** in the top left corner.
 
@@ -326,4 +328,3 @@ Even if the theme is declined, you can always use it on the preview link and sub
 If the pull request is closed, you can see a comment that describes why it's closed.
 
 ![Screenshot](img/closed-pr.jpeg)
-

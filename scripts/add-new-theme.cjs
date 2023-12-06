@@ -1,15 +1,16 @@
 const themeRaw = JSON.parse(process.argv[2]);
+const _undef = undefined; // can be either null of undefined
 console.log('theme raw:', themeRaw);
 const themeObj = {
 	fullName: themeRaw.fullName,
-	availability: {
+	availability: ([...themeRaw.availability].length === 12) ? {
 		monthSeason: [...themeRaw.availability]
-	},
+	} : _undef,
 	bodyStyle: {
 		backgroundColor: themeRaw.bgcolor,
 		color: themeRaw.color
 	},
-	images: themeRaw.custimg ? undefined : '%-default-@.png',
+	images: themeRaw.custimg ? _undef : '%-default-@.png',
 	squares: {
 		lightColor: [themeRaw.lscolor, themeRaw['lscolor-selected'], themeRaw['lscolor-canmove']],
 		darkColor: [themeRaw.dscolor, themeRaw['dscolor-selected'], themeRaw['dscolor-canmove']]

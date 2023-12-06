@@ -41,7 +41,7 @@ jobs:
         GNAME: ${{ github.actor }}
         GEMAIL: ${{ github.actor }}@users.noreply.github.com
     - name: Commit
-      run: git add hello.json && git commit -m"Automatic hello.json update"
+      run: git add hello.json && git commit -m"Automated theme submission for issue #${{ github.event.issue.number }}"
     - name: Push
       run: git push -u origin ${{ steps.branch.outputs.name }}
     - name: Create PR

@@ -8,7 +8,7 @@ body:
     attributes:
       label: Describe the bug
       description: A clear and concise description of what the bug is.
-    validation:
+    validations:
       required: true
   - type: textarea
     attributes:
@@ -18,19 +18,19 @@ body:
         2. Click on '....'
         3. Scroll down to '....'
         4. See error
-    validation:
+    validations:
       required: true
   - type: textarea
     attributes:
       label: Expected behavior
       description: A clear and concise description of what you expected to happen.
-    validation:
+    validations:
       required: true
   - type: textarea
     attributes:
       label: Screenshots
       description: If applicable, add screenshots to help explain your problem.
-    validation:
+    validations:
       required: false
   - type: dropdown
     attributes:
@@ -39,35 +39,35 @@ body:
         - Desktop
         - Smartphone
         - Tablet
-    validation:
+    validations:
       required: true
   - type: input
     attributes:
       label: Device
       placeholder: e.g. iPhone6
-    validation:
+    validations:
       required: false
   - type: input
     attributes:
       label: OS
       placeholder: e.g. iOS
-    validation:
+    validations:
       required: true
   - type: input
     attributes:
       label: Browser
       placeholder: e.g. Chrome, Safari
-    validation:
+    validations:
       required: true
   - type: input
     attributes:
       label: Browser version
       placeholder: e.g. 22
-    validation:
+    validations:
       required: true
   - type: textarea
     attributes:
       label: Additional context
       description: Add any other context about the problem here.
-    validation:
+    validations:
       required: false

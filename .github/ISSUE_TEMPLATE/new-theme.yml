@@ -13,56 +13,78 @@ body:
     attributes:
       label: Internal name
       description: The internal name of the theme, in camel case - without spaces and special characters and every word except the first starts with a capital letter. For example, `christmasDark` instead of `Christmas Dark`.
+    validations:
+      required: true
   - type: input
     id: fullName
     attributes:
       label: Full name
       description: The full name of the theme, for example `Christmas Dark`.
+    validations:
+      required: true
   - type: input
     id: bgcolor
     attributes:
       label: Background color
       description: The background color of the chess (will set the colors attribute).
+    validations:
+      required: true
   - type: input
     id: color
     attributes:
       label: Text color
       description: The text color of the coordinates and the "X to move" text.
+    validations:
+      required: true
   - type: input
     id: lscolor
     attributes:
       label: Light square color - NORMAL
       description: The normal color of the light squares.
+    validations:
+      required: true
   - type: input
     id: lscolor-selected
     attributes:
       label: Light square color - SELECTED
       description: The color when there is a selected piece an a light square.
+    validations:
+      required: true
   - type: input
     id: lscolor-canmove
     attributes:
       label: Light square color - POSSIBLE MOVE
       description: The color of a light square when the selected piece can move to that square
+    validations:
+      required: true
   - type: input
     id: dscolor
     attributes:
       label: Dark square color - NORMAL
       description: The normal color of the dark squares.
+    validations:
+      required: true
   - type: input
     id: dscolor-selected
     attributes:
       label: Dark square color - SELECTED
       description: The color when there is a selected piece an a dark square.
+    validations:
+      required: true
   - type: input
     id: dscolor-canmove
     attributes:
       label: Dark square color - POSSIBLE MOVE
       description: The color of a dark square when the selected piece can move to that square.
+    validations:
+      required: true
   - type: textarea
     id: custimg
     attributes:
       label: Custom images
       description: Drag every image into this field in the PNG format and size 32x32, named `<square color>-<piece name>.png` (lowercase; square color is `light` or `dark`). ***DO NOT PROVIDE A LINK TO AN EXTERNAL FILE SOURCE LIKE ONEDRIVE!***
+    validations:
+      required: false
   - type: dropdown
     id: availability
     attributes:
@@ -70,3 +92,5 @@ body:
       description: In which months the theme should be available (select all if always).
       multiple: true
       options: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    validations:
+      required: true

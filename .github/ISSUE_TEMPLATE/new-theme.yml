@@ -9,25 +9,35 @@ body:
         # Theme submission
         All colors can be one of [these color codes](https://www.w3schools.com/colors/colors_names.asp).
   - type: input
+    id: name
+    attributes:
+      label: Internal name
+      description: The internal name of the theme, in camel case - without spaces and special characters and every word except the first starts with a capital letter. For example, `christmasDark` instead of `Christmas Dark`.
+  - type: input
+    id: fullName
+    attributes:
+      label: Full name
+      description: The full name of the theme, for example `Christmas Dark`.
+  - type: input
     id: bgcolor
     attributes:
       label: Background color
-      description: The background color of the chess (will set the colors attribute)
+      description: The background color of the chess (will set the colors attribute).
   - type: input
     id: color
     attributes:
       label: Text color
-      description: The text color of the coordinates and the "X to move" text
+      description: The text color of the coordinates and the "X to move" text.
   - type: input
     id: lscolor
     attributes:
       label: Light square color - NORMAL
-      description: The normal color of the light squares
+      description: The normal color of the light squares.
   - type: input
     id: lscolor-selected
     attributes:
       label: Light square color - SELECTED
-      description: The color when there is a selected piece an a light square
+      description: The color when there is a selected piece an a light square.
   - type: input
     id: lscolor-canmove
     attributes:
@@ -37,17 +47,17 @@ body:
     id: dscolor
     attributes:
       label: Dark square color - NORMAL
-      description: The normal color of the dark squares
+      description: The normal color of the dark squares.
   - type: input
     id: dscolor-selected
     attributes:
       label: Dark square color - SELECTED
-      description: The color when there is a selected piece an a dark square
+      description: The color when there is a selected piece an a dark square.
   - type: input
     id: dscolor-canmove
     attributes:
       label: Dark square color - POSSIBLE MOVE
-      description: The color of a dark square when the selected piece can move to that square
+      description: The color of a dark square when the selected piece can move to that square.
   - type: textarea
     id: custimg
     attributes:

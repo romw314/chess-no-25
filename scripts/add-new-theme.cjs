@@ -1,10 +1,11 @@
 const themeRaw = JSON.parse(process.argv[2]);
 const _undef = undefined; // can be either null of undefined
 console.log('theme raw:', themeRaw);
+const av = themeRaw.availability.split(', ');
 const themeObj = {
 	fullName: themeRaw.fullName,
-	availability: ([...themeRaw.availability].length === 12) ? _undef :{
-		monthSeason: [...themeRaw.availability]
+	availability: (av.length === 12) ? _undef : {
+		monthSeason: av
 	},
 	bodyStyle: {
 		backgroundColor: themeRaw.bgcolor,

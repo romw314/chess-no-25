@@ -44,7 +44,9 @@ jobs:
         GNAME: ${{ github.actor }}
         GEMAIL: ${{ github.actor }}@users.noreply.github.com
     - name: Commit
-      run: git add src/themes.json && git commit -m"Automated theme submission for issue #$NUM"
+      run: |
+        git add src/themes.json
+        git commit -m"Automated theme submission for issue #$NUM"
       env:
         NUM: ${{ github.event.issue.number }}
     - name: Push

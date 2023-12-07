@@ -17,12 +17,12 @@ jobs:
         echo "=============================="
         echo "PR JSON:"
         echo "$PR_JSON"
-      env:
-        PR_JSON: ${{ toJSON(github.event.issue.pull_request) }}
-        ACTOR: ${{ github.actor }}
-        NUM: ${{ github.event.issue.number }}
-        BODY: ${{ github.event.comment.body }}
-        PRBODY: ${{ github.event.issue.body }}
+    env:
+      PR_JSON: ${{ toJSON(github.event.issue.pull_request) }}
+      ACTOR: ${{ github.actor }}
+      NUM: ${{ github.event.issue.number }}
+      BODY: ${{ github.event.comment.body }}
+      PRBODY: ${{ github.event.issue.body }}
   update-theme:
     if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') && contains(github.event.comment.body, '!update') }}
     runs-on: ubuntu-latest
@@ -117,3 +117,4 @@ jobs:
           Dark square color - NORMAL         | `dscolor`
           Dark square color - SELECTED       | `dscolor-selected`
           Dark square color - POSSIBLE MOVE  | `dscolor-canmove`
+        GH_TOKEN: ${{ github.token }}

@@ -39,7 +39,7 @@ function ThemesPage() {
 		let style = {};
 		if (available) // empty string '' if falsy
 			style.color = 'green';
-		themelist.push(<li className={styles.themeLink} key={theme}><Link to={`/play/?theme=${theme}`} style={style}>{themes.themes[theme].fullName ?? theme}</Link>{themes.themes[theme].original ? '*' : ''}<strong>{available}</strong></li>);
+		themelist.push(<li className={styles.themeLink} key={theme}><Link to={`/play?theme=${theme}`} style={style}>{themes.themes[theme].fullName ?? theme}</Link>{themes.themes[theme].original ? '*' : ''}<strong>{available}</strong></li>);
 	}
 	return (
 		<>

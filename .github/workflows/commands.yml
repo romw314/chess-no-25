@@ -28,12 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Get head branch
-      uses: xt0rted/pull-request-comment-branch@v2
+      uses: eficode/resolve-pr-refs@v0.0.4
       id: branch
+      with:
+        token: ${{ github.token }}
     - name: Checkout
       uses: actions/checkout@v2.7.0
       with:
-        ref: ${{ steps.comment-branch.outputs.head_ref }}
+        ref: ${{ steps.branch.outputs.head_ref }}
     - name: Read body
       id: parse
       uses: edumserrano/github-issue-forms-parser@v1
@@ -47,7 +49,7 @@ jobs:
     - name: Extract command parameters
       id: extractcmd
       run: |
-        ONELINE_MATCH="$(grep -m1 -P '^!update [A-Za-z0-9]([A-Za-z_.-]*[A-Za-z0-9])? [A-Za-z0-9]([A-Za-z_#\[\],-]*[A-Za-z0-9])?$' <<< "$BODY")" && echo "err=false" >> "$GITHUB_OUTPUT" || echo "err=true" >> "$GITHUB_OUTPUT"
+        ONELINE_MATCH="$(grep -m1 -P '^!update [A-Za-z0-9]([A-Za-z_.-]*[A-Za-z0-9])? [A-Za-z"\[]([A-Za-z_#\[\],"-]*[A-Za-z0-9"\]])?$' <<< "$BODY")" && echo "err=false" >> "$GITHUB_OUTPUT" || echo "err=true" >> "$GITHUB_OUTPUT"
         MATCH="$(tr ' ' '\n' <<< "$ONELINE_MATCH")"
         echo "prop=$(head -n2 <<< "$MATCH" | tail -n1)" >> "$GITHUB_OUTPUT"
         echo "good=$(tail -n1 <<< "$MATCH")" >> "$GITHUB_OUTPUT"

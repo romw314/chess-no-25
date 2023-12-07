@@ -103,3 +103,4 @@ body:
         - label: I confirm that this theme can be integrated to this GitHub repository and licensed under [the Unlicense](https://choosealicense.com/licenses/unlicense/).
           required: true
         - label: I am aware that the theme can be updated by anyone and it's not guranteed that it will remain as you entered it now here.
+          required: true

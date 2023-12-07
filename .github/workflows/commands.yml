@@ -28,12 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Get head branch
-      uses: xt0rted/pull-request-comment-branch@v2
+      uses: eficode/resolve-pr-refs@v0.0.4
       id: branch
+      with:
+        token: ${{ github.token }}
     - name: Checkout
       uses: actions/checkout@v2.7.0
       with:
-        ref: ${{ steps.comment-branch.outputs.head_ref }}
+        ref: ${{ steps.branch.outputs.head_ref }}
     - name: Read body
       id: parse
       uses: edumserrano/github-issue-forms-parser@v1

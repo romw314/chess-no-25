@@ -56,7 +56,7 @@ jobs:
     - name: Report error
       if: ${{ steps.extractcmd.outputs.err == 'true' }}
       run: |
-        gh pr comment ${{ github.event.issue.number }} ":x: Could not find the update data. Type `!help update-theme` to get help."
+        gh pr comment ${{ github.event.issue.number }} ':x: Could not find the update data. Type `!help update-theme` to get help.'
         exit 1
       env:
         GH_TOKEN: ${{ github.token }}

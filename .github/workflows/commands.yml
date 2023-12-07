@@ -51,6 +51,7 @@ jobs:
         MATCH="$(tr ' ' '\n' <<< "$ONELINE_MATCH")"
         echo "prop=$(head -n2 <<< "$MATCH" | tail -n1)" >> "$GITHUB_OUTPUT"
         echo "good=$(tail -n1 <<< "$MATCH")" >> "$GITHUB_OUTPUT"
+        set
       env:
         BODY: ${{ github.event.comment.body }}
     - name: Report error

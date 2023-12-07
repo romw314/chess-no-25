@@ -78,13 +78,14 @@ body:
       description: The color of a dark square when the selected piece can move to that square.
     validations:
       required: true
-  - type: textarea
-    id: custimg
-    attributes:
-      label: Custom images
-      description: Drag every image into this field in the PNG format and size 32x32, named `<square color>-<piece name>.png` (lowercase; square color is `light` or `dark`). ***DO NOT PROVIDE A LINK TO AN EXTERNAL FILE SOURCE LIKE ONEDRIVE!***
-    validations:
-      required: false
+### Custom images - Coming soon
+#  - type: textarea
+#    id: custimg
+#    attributes:
+#      label: Custom images
+#      description: Drag every image into this field in the PNG format and size 32x32, named `<square color>-<piece name>.png` (lowercase; square color is `light` or `dark`). ***DO NOT PROVIDE A LINK TO AN EXTERNAL FILE SOURCE LIKE ONEDRIVE!***
+#    validations:
+#      required: false
   - type: dropdown
     id: availability
     attributes:

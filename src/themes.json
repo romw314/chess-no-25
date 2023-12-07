@@ -169,6 +169,33 @@
 					"#D2691E"
 				]
 			}
+		},
+		"winter": {
+			"fullName": "Winter",
+			"availability": {
+				"monthSeason": [
+					"January",
+					"February",
+					"December"
+				]
+			},
+			"bodyStyle": {
+				"backgroundColor": "midnightblue",
+				"color": "oldlace"
+			},
+			"images": "%-default-@.png",
+			"squares": {
+				"lightColor": [
+					"silver",
+					"thistle",
+					"violet"
+				],
+				"darkColor": [
+					"steelblue",
+					"indigo",
+					"turquoise"
+				]
+			}
 		}
 	}
 }

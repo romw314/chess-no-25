@@ -1,0 +1,96 @@
+name: PR Commands
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  update-theme:
+    if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') && contains(github.event.comment.body, '!update') }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get head branch
+      uses: xt0rted/pull-request-comment-branch@v2
+      id: branch
+    - name: Checkout
+      uses: actions/checkout@v2.7.0
+      with:
+        ref: ${{ steps.comment-branch.outputs.head_ref }}
+    - name: Read body
+      id: parse
+      uses: edumserrano/github-issue-forms-parser@v1
+      with:
+        template-filepath: .github/ISSUE_TEMPLATE/new-theme.yml
+        issue-form-body: ${{ github.event.issue.body }}
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Extract command parameters
+      id: extractcmd
+      run: |
+        MATCH="$(grep -m1 -E '^!update [A-Za-z0-9]([A-Za-z_-.]*[A-Za-z0-9])? [A-Za-z0-9]([A-Za-z_-#\[\],]*[A-Za-z0-9])?$' <<< "$BODY" | tr ' ' '\n')" || echo "err=true" >> "$GITHUB_OUTPUT"
+        echo "prop=$(head -n2 <<< "$MATCH" | tail -n1)" >> "$GITHUB_OUTPUT"
+        echo "good=$(tail -n1 <<< "$MATCH")" >> "$GITHUB_OUTPUT"
+      env:
+        BODY: ${{ github.event.comment.body }}
+    - name: Report error
+      if: ${{ steps.extractcmd.outputs.err == 'true' }}
+      run: |
+        gh pr comment ${{ github.event.issue.number }} ":x: Could not find the update data. Type `!help update-theme` to get help."
+    - name: Make the change
+      run: |
+        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")"
+        echo '=============================='
+        cat themes.new.json | jq --tab . | tee src/themes.json
+      env:
+        THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
+        PROP: ${{ steps.extractcmd.outputs.prop }}
+        GOOD: ${{ steps.extractcmd.outputs.good }}
+    - name: Configure Git
+      run: git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL"
+      env:
+        GNAME: ${{ github.actor }}
+        GEMAIL: ${{ github.actor }}@users.noreply.github.com
+    - name: Commit and push
+      run: |
+        git add src/themes.json
+        git commit -m"Update $PROP to $GOOD"
+        git push
+      env:
+        PROP: ${{ steps.extractcmd.outputs.prop }}
+        GOOD: ${{ steps.extractcmd.outputs.good }}
+    - name: Comment on PR
+      run: |
+        gh pr comment ${{ github.event.issue.number }} --body ":hooray: Updated `$PROP` successfully :clap:"
+      env:
+        PROP: ${{ steps.extractcmd.outputs.prop }}
+  update-theme-help:
+    if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') && contains(github.event.comment.body, '!help update-theme') }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Comment on PR
+      run: |
+        gh pr comment ${{ github.event.issue.number }} --body "$BODY"
+      env:
+        BODY: |
+          Welcome, @${{ github.actor }}.
+
+          The `!update` command can be used as following:
+          ```
+          !update <PROPERTY NAME> <NEW VALUE>
+          ```
+
+          Here are the property names:
+          
+          Field                              | Property name
+          ---------------------------------- | ------------------
+          Internal name                      | `name`
+          Full name                          | `fullName`
+          Background color                   | `bgcolor`
+          Color                              | `color`
+          Light square color - NORMAL        | `lscolor`
+          Light square color - SELECTED      | `lscolor-selected`
+          Light square color - POSSIBLE MOVE | `lscolor-canmove`
+          Dark square color - NORMAL         | `dscolor`
+          Dark square color - SELECTED       | `dscolor-selected`
+          Dark square color - POSSIBLE MOVE  | `dscolor-canmove`

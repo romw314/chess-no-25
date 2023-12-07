@@ -53,7 +53,7 @@ jobs:
       run: git push -u origin ${{ steps.branch.outputs.name }}
     - name: Create PR
       id: pr
-      run: echo "url=$(gh pr create --title "$TITLE" --body "$BODY")" >> "$GITHUB_OUTPUT"
+      run: echo "url=$(gh pr create --title "$TITLE" --body "$BODY" --label "new theme")" >> "$GITHUB_OUTPUT"
       env:
         TITLE: ${{ github.event.issue.title }}
         BODY: ${{ github.event.issue.body }}

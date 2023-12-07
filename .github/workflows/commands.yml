@@ -4,6 +4,25 @@ on:
     types: [created, edited]
 
 jobs:
+  report:
+    if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') }}
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "On PR #$NUM @$ACTOR commented:"
+        echo "$BODY"
+        echo "=============================="
+        echo "PR original body:"
+        echo "$PRBODY"
+        echo "=============================="
+        echo "PR JSON:"
+        echo "$PR_JSON"
+    env:
+      PR_JSON: ${{ toJSON(github.event.issue.pull_request) }}
+      ACTOR: ${{ github.actor }}
+      NUM: ${{ github.event.issue.number }}
+      BODY: ${{ github.event.comment.body }}
+      PRBODY: ${{ github.event.issue.body }}
   update-theme:
     if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') && contains(github.event.comment.body, '!update') }}
     runs-on: ubuntu-latest
@@ -28,7 +47,8 @@ jobs:
     - name: Extract command parameters
       id: extractcmd
       run: |
-        MATCH="$(grep -m1 -E '^!update [A-Za-z0-9]([A-Za-z_-.]*[A-Za-z0-9])? [A-Za-z0-9]([A-Za-z_-#\[\],]*[A-Za-z0-9])?$' <<< "$BODY" | tr ' ' '\n')" || echo "err=true" >> "$GITHUB_OUTPUT"
+        ONELINE_MATCH="$(grep -m1 -E '^!update [A-Za-z0-9]([A-Za-z_.-]*[A-Za-z0-9])? [A-Za-z0-9]([A-Za-z_#\[\],-]*[A-Za-z0-9])?$' <<< "$BODY")" || echo "err=true" >> "$GITHUB_OUTPUT"
+        MATCH="$(tr ' ' '\n' <<< "$ONELINE_MATCH")"
         echo "prop=$(head -n2 <<< "$MATCH" | tail -n1)" >> "$GITHUB_OUTPUT"
         echo "good=$(tail -n1 <<< "$MATCH")" >> "$GITHUB_OUTPUT"
       env:
@@ -37,6 +57,9 @@ jobs:
       if: ${{ steps.extractcmd.outputs.err == 'true' }}
       run: |
         gh pr comment ${{ github.event.issue.number }} ":x: Could not find the update data. Type `!help update-theme` to get help."
+        exit 1
+      env:
+        GH_TOKEN: ${{ github.token }}
     - name: Make the change
       run: |
         node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")"
@@ -64,10 +87,13 @@ jobs:
         gh pr comment ${{ github.event.issue.number }} --body ":hooray: Updated `$PROP` successfully :clap:"
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}
+        GH_TOKEN: ${{ github.token }}
   update-theme-help:
     if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') && contains(github.event.comment.body, '!help update-theme') }}
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2.7.0
     - name: Comment on PR
       run: |
         gh pr comment ${{ github.event.issue.number }} --body "$BODY"
@@ -94,3 +120,4 @@ jobs:
           Dark square color - NORMAL         | `dscolor`
           Dark square color - SELECTED       | `dscolor-selected`
           Dark square color - POSSIBLE MOVE  | `dscolor-canmove`
+        GH_TOKEN: ${{ github.token }}

@@ -1,4 +1,4 @@
-name: PR Commands
+\name: PR Commands
 on:
   issue_comment:
     types: [created, edited]
@@ -47,7 +47,7 @@ jobs:
     - name: Extract command parameters
       id: extractcmd
       run: |
-        ONELINE_MATCH="$(grep -m1 -E '^!update [A-Za-z0-9]([A-Za-z_.-]*[A-Za-z0-9])? [A-Za-z0-9]([A-Za-z_#\[\],-]*[A-Za-z0-9])?$' <<< "$BODY")" || echo "err=true" >> "$GITHUB_OUTPUT"
+        ONELINE_MATCH="$(grep -m1 -E '^!update [A-Za-z0-9]([A-Za-z_.-]*[A-Za-z0-9])? [A-Za-z0-9]([A-Za-z_#\[\],-]*[A-Za-z0-9])?$' <<< "$BODY")" && echo "err=false" >> "$GITHUB_OUTPUT" || echo "err=true" >> "$GITHUB_OUTPUT"
         MATCH="$(tr ' ' '\n' <<< "$ONELINE_MATCH")"
         echo "prop=$(head -n2 <<< "$MATCH" | tail -n1)" >> "$GITHUB_OUTPUT"
         echo "good=$(tail -n1 <<< "$MATCH")" >> "$GITHUB_OUTPUT"

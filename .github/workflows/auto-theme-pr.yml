@@ -35,7 +35,7 @@ jobs:
       run: |
         node scripts/add-new-theme.cjs "$THEMEINFO"
         echo '=============================='
-        cat themes.new.json | jq . | tee src/themes.json
+        cat themes.new.json | jq --tab . | tee src/themes.json
       env:
         THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
     - name: Configure Git

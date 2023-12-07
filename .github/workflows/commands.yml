@@ -56,6 +56,9 @@ jobs:
       if: ${{ steps.extractcmd.outputs.err == 'true' }}
       run: |
         gh pr comment ${{ github.event.issue.number }} ":x: Could not find the update data. Type `!help update-theme` to get help."
+        exit 1
+      env:
+        GH_TOKEN: ${{ github.token }}
     - name: Make the change
       run: |
         node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")"
@@ -83,6 +86,7 @@ jobs:
         gh pr comment ${{ github.event.issue.number }} --body ":hooray: Updated `$PROP` successfully :clap:"
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}
+        GH_TOKEN: ${{ github.token }}
   update-theme-help:
     if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') && contains(github.event.comment.body, '!help update-theme') }}
     runs-on: ubuntu-latest

@@ -109,15 +109,10 @@ jobs:
         elif [ "$COMMIT" = failure ]; then
           gh issue comment ${{ github.event.issue.number }} --body ":x: An internal error occured while commiting the changes:
         
-        \`\`\`${context.env.COMMIT_LOGS}\`\`\`"
+        \`\`\`$COMMIT_LOGS\`\`\`"
         else
           gh issue comment ${{ github.event.issue.number }} --body ':x: An internal error occured.'
         fi
-      env:
-        GH_TOKEN: ${{ github.token }}
-    - name: Comment on PR
-      run: |
-        gh pr comment ${{ github.event.issue.number }} --body "🎉 Updated \`$PROP\` successfully 👏"
       env:
         CHANGE: ${{ steps.change.conclusion }}
         CHLOGS: ${{ env.CHANGE_LOGS }}
@@ -126,6 +121,11 @@ jobs:
         COMMIT: ${{ steps.commit.conclusion }}
         COMMIT_LOGS: ${{ env.COMMIT_LOGS }}
         PROP: ${{ steps.extractcmd.outputs.prop }}
+        GH_TOKEN: ${{ github.token }}
+    - name: Comment on PR
+      run: |
+        gh pr comment ${{ github.event.issue.number }} --body "🎉 Updated \`$PROP\` successfully 👏"
+      env:
         GH_TOKEN: ${{ github.token }}
   update-theme-help:
     if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') && contains(github.event.comment.body, '!help update-theme') }}

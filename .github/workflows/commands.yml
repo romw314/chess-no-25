@@ -119,6 +119,12 @@ jobs:
       run: |
         gh pr comment ${{ github.event.issue.number }} --body "🎉 Updated \`$PROP\` successfully 👏"
       env:
+        CHANGE: ${{ steps.change.conclusion }}
+        CHLOGS: ${{ env.CHANGE_LOGS }}
+        GITCONFIG: ${{ steps.gitconfig.conclusion }}
+        GCLOGS: ${{ env.GIT_CONFIG_LOGS }}
+        COMMIT: ${{ steps.commit.conclusion }}
+        COMMIT_LOGS: ${{ env.COMMIT_LOGS }}
         PROP: ${{ steps.extractcmd.outputs.prop }}
         GH_TOKEN: ${{ github.token }}
   update-theme-help:

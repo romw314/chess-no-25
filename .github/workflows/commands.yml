@@ -67,9 +67,9 @@ jobs:
       id: change
       run: |
         echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
-        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")" >> "$GITHUB_OUTPUT"
-        echo '==============================' >> "$GITHUB_OUTPUT"
-        cat themes.new.json | jq --tab . | tee src/themes.json >> "$GITHUB_OUTPUT"
+        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")" &>> "$GITHUB_OUTPUT"
+        echo '==============================' &>> "$GITHUB_OUTPUT"
+        cat themes.new.json | jq --tab . | tee src/themes.json &>> "$GITHUB_OUTPUT"
         echo >> "$GITHUB_OUTPUT" # ensure newline at the end
         echo 'EOF' >> "$GITHUB_OUTPUT"
       env:
@@ -80,7 +80,7 @@ jobs:
       id: gitconfig
       run: |
         echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
-        git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL" >> "$GITHUB_OUTPUT"
+        ( git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL" ) &>> "$GITHUB_OUTPUT"
         echo >> "$GITHUB_OUTPUT" # ensure newline at the end
         echo 'EOF' >> "$GITHUB_OUTPUT"
       env:
@@ -90,9 +90,9 @@ jobs:
       id: commit
       run: |
         echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
-        git add src/themes.json >> "$GITHUB_OUTPUT"
-        git commit -m"Update $PROP to $GOOD" >> "$GITHUB_OUTPUT"
-        git push >> "$GITHUB_OUTPUT"
+        git add src/themes.json &>> "$GITHUB_OUTPUT"
+        git commit -m"Update $PROP to $GOOD" &>> "$GITHUB_OUTPUT"
+        git push &>> "$GITHUB_OUTPUT"
         echo >> "$GITHUB_OUTPUT" # ensure newline at the end
         echo 'EOF' >> "$GITHUB_OUTPUT"
       env:

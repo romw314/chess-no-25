@@ -99,19 +99,19 @@ jobs:
       if: ${{ failure() }}
       run: |
         if [ "$CHANGE" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} ":x: An error occured while doing the change:
+          gh issue comment ${{ github.event.issue.number }} --body ":x: An error occured while doing the change:
         
         \`\`\`$CHLOGS\`\`\`"
         elif [ "$GITCONFIG" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} ":x: An internal error occured while configuring Git:
+          gh issue comment ${{ github.event.issue.number }} --body ":x: An internal error occured while configuring Git:
         
         \`\`\`$GCLOGS\`\`\`"
         elif [ "$COMMIT" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} ":x: An internal error occured while commiting the changes:
+          gh issue comment ${{ github.event.issue.number }} --body ":x: An internal error occured while commiting the changes:
         
         \`\`\`${context.env.COMMIT_LOGS}\`\`\`"
         else
-          gh issue comment ${{ github.event.issue.number }} ':x: An internal error occured.'
+          gh issue comment ${{ github.event.issue.number }} --body ':x: An internal error occured.'
         fi
       env:
         GH_TOKEN: ${{ github.token }}

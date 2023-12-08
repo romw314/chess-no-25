@@ -64,30 +64,78 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
     - name: Make the change
+      id: change
       run: |
-        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")"
-        echo '=============================='
-        cat themes.new.json | jq --tab . | tee src/themes.json
+        echo "CHANGE_LOGS<<EOF" >> "$GITHUB_ENV"
+        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")" >> "$GITHUB_ENV"
+        echo '==============================' >> "$GITHUB_ENV"
+        cat themes.new.json | jq --tab . | tee src/themes.json >> "$GITHUB_ENV"
+        echo "EOF" >> "$GITHUB_ENV"
       env:
         THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
         PROP: ${{ steps.extractcmd.outputs.prop }}
         GOOD: ${{ steps.extractcmd.outputs.good }}
     - name: Configure Git
-      run: git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL"
+      id: gitconfig
+      run: |
+        echo "GIT_CONFIG_LOGS<<EOF" >> "$GITHUB_ENV"
+        git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL" >> "$GITHUB_ENV"
+        echo "EOF" >> "$GITHUB_ENV"
       env:
         GNAME: ${{ github.actor }}
         GEMAIL: ${{ github.actor }}@users.noreply.github.com
     - name: Commit and push
+      id: commit
       run: |
-        git add src/themes.json
-        git commit -m"Update $PROP to $GOOD"
-        git push
+        echo "COMMIT_LOGS<<EOF" >> "$GITHUB_ENV"
+        git add src/themes.json >> "$GITHUB_ENV"
+        git commit -m"Update $PROP to $GOOD" >> "$GITHUB_ENV"
+        git push >> "$GITHUB_ENV"
+        echo "EOF" >> "$GITHUB_ENV"
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}
         GOOD: ${{ steps.extractcmd.outputs.good }}
+    - name: Report error
+      if: ${{ failure() }}
+      uses: actions/github-script@v7.0.1
+      with:
+        script: |
+          switch (['change', 'gitconfig', 'commit'].map(step => context.steps[step].conclusion).indexOf('failure')) {
+            case 1: // change
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `:x: An error occured while doing the change:\n\n\`\`\`${context.env.CHANGE_LOGS}`
+              });
+              break;
+            case 2: // gitconfig
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `:x: An internal error occured while configuring Git:\n\n\`\`\`${context.env.GIT_CONFIG_LOGS}\`\`\``
+              });
+              break;
+            case 3: // commit
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `:x: An internal error occured while commiting the changes:\n\n\`\`\`${context.env.COMMIT_LOGS}\`\`\``
+              });
+              break;
+            default: // will usually be -1
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: ':x: An internal error occured.'
+              });
+          }
     - name: Comment on PR
       run: |
-        gh pr comment ${{ github.event.issue.number }} --body ":hooray: Updated `$PROP` successfully :clap:"
+        gh pr comment ${{ github.event.issue.number }} --body "🎉 Updated \`$PROP\` successfully 👏"
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}
         GH_TOKEN: ${{ github.token }}

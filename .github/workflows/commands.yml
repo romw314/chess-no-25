@@ -70,7 +70,7 @@ jobs:
         node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")" >> "$GITHUB_ENV"
         echo '==============================' >> "$GITHUB_ENV"
         cat themes.new.json | jq --tab . | tee src/themes.json >> "$GITHUB_ENV"
-        echo # ensure newline at the end
+        echo >> "$GITHUB_ENV" # ensure newline at the end
         echo 'EOF' >> "$GITHUB_ENV"
       env:
         THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
@@ -81,7 +81,7 @@ jobs:
       run: |
         echo 'GIT_CONFIG_LOGS<<EOF' >> "$GITHUB_ENV"
         git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL" >> "$GITHUB_ENV"
-        echo # ensure newline at the end
+        echo >> "$GITHUB_ENV" # ensure newline at the end
         echo 'EOF' >> "$GITHUB_ENV"
       env:
         GNAME: ${{ github.actor }}
@@ -93,7 +93,7 @@ jobs:
         git add src/themes.json >> "$GITHUB_ENV"
         git commit -m"Update $PROP to $GOOD" >> "$GITHUB_ENV"
         git push >> "$GITHUB_ENV"
-        echo # ensure newline at the end
+        echo >> "$GITHUB_OUTPUT" # ensure newline at the end
         echo 'EOF' >> "$GITHUB_ENV"
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}

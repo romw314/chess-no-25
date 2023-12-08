@@ -67,7 +67,7 @@ jobs:
       id: change
       run: |
         echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
-        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")" &>> "$GITHUB_OUTPUT"
+        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD" 2>>"$GITHUB_OUTPUT")" &>> "$GITHUB_OUTPUT"
         echo '==============================' &>> "$GITHUB_OUTPUT"
         cat themes.new.json | jq --tab . | tee src/themes.json &>> "$GITHUB_OUTPUT"
         echo >> "$GITHUB_OUTPUT" # ensure newline at the end

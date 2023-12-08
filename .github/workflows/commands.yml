@@ -94,11 +94,11 @@ jobs:
       if: ${{ failure() }}
       run: |
         if [ "$CHANGE" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body '❌ An error occured while doing the change:'
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An error occured while doing the change.'
         elif [ "$GITCONFIG" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured while configuring Git:'
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured while configuring Git.'
         elif [ "$COMMIT" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured while commiting the changes:'
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured while commiting the changes.'
         else
           gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured.'
         fi

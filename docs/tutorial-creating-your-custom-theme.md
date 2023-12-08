@@ -39,7 +39,7 @@ Choose what theme do you want to create and choose a proper and internal name.
 
 The internal name should be one of these:
 
-* The full name of the theme, but in camel case: special characters like `&` are removed, each word except the first starts with a capital letter and the first word is lowercase.
+* The full name of the theme, but in camel case: without spaces, special characters like `&` are removed, each word except the first starts with a capital letter and the first word is lowercase.
 * An abbreviation of the full name of the theme.
 
 For example, if you are creating a theme named `Lava`, the internal name should be `lava`.

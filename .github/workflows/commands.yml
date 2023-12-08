@@ -59,18 +59,16 @@ jobs:
     - name: Report error
       if: ${{ steps.extractcmd.outputs.err == 'true' }}
       run: |
-        gh pr comment ${{ github.event.issue.number }} --body ':x: Could not find the update data. Type `!help update-theme` to get help.'
+        gh pr comment ${{ github.event.issue.number }} --body '❌ Could not find the update data. Type `!help update-theme` to get help.'
         exit 1
       env:
         GH_TOKEN: ${{ github.token }}
     - name: Make the change
       id: change
       run: |
-        echo "CHANGE_LOGS<<EOF" >> "$GITHUB_ENV"
-        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")" >> "$GITHUB_ENV"
-        echo '==============================' >> "$GITHUB_ENV"
-        cat themes.new.json | jq --tab . | tee src/themes.json >> "$GITHUB_ENV"
-        echo "EOF" >> "$GITHUB_ENV"
+        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")"
+        echo '=============================='
+        cat themes.new.json | jq --tab . | tee src/themes.json
       env:
         THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
         PROP: ${{ steps.extractcmd.outputs.prop }}
@@ -78,61 +76,41 @@ jobs:
     - name: Configure Git
       id: gitconfig
       run: |
-        echo "GIT_CONFIG_LOGS<<EOF" >> "$GITHUB_ENV"
-        git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL" >> "$GITHUB_ENV"
-        echo "EOF" >> "$GITHUB_ENV"
+        git config --global user.name "$GNAME"
+        git config --global user.email "$GEMAIL"
       env:
         GNAME: ${{ github.actor }}
         GEMAIL: ${{ github.actor }}@users.noreply.github.com
     - name: Commit and push
       id: commit
       run: |
-        echo "COMMIT_LOGS<<EOF" >> "$GITHUB_ENV"
-        git add src/themes.json >> "$GITHUB_ENV"
-        git commit -m"Update $PROP to $GOOD" >> "$GITHUB_ENV"
-        git push >> "$GITHUB_ENV"
-        echo "EOF" >> "$GITHUB_ENV"
+        git add src/themes.json
+        git commit -m"Update $PROP to $GOOD"
+        git push
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}
         GOOD: ${{ steps.extractcmd.outputs.good }}
     - name: Report error
       if: ${{ failure() }}
-      uses: actions/github-script@v7.0.1
-      with:
-        script: |
-          switch (['change', 'gitconfig', 'commit'].map(step => context.steps[step].conclusion).indexOf('failure')) {
-            case 1: // change
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `:x: An error occured while doing the change:\n\n\`\`\`${context.env.CHANGE_LOGS}`
-              });
-              break;
-            case 2: // gitconfig
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `:x: An internal error occured while configuring Git:\n\n\`\`\`${context.env.GIT_CONFIG_LOGS}\`\`\``
-              });
-              break;
-            case 3: // commit
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `:x: An internal error occured while commiting the changes:\n\n\`\`\`${context.env.COMMIT_LOGS}\`\`\``
-              });
-              break;
-            default: // will usually be -1
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: ':x: An internal error occured.'
-              });
-          }
+      run: |
+        if [ "$CHANGE" = failure ]; then
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An error occured while doing the change.'
+        elif [ "$GITCONFIG" = failure ]; then
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured while configuring Git.'
+        elif [ "$COMMIT" = failure ]; then
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured while commiting the changes.'
+        else
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured.'
+        fi
+      env:
+        CHANGE: ${{ steps.change.conclusion }}
+        CHLOGS: ${{ steps.change.logs }}
+        GITCONFIG: ${{ steps.gitconfig.conclusion }}
+        GCLOGS: ${{ steps.gitconfig.logs }}
+        COMMIT: ${{ steps.commit.conclusion }}
+        COMMIT_LOGS: ${{ steps.commit.logs }}
+        PROP: ${{ steps.extractcmd.outputs.prop }}
+        GH_TOKEN: ${{ github.token }}
     - name: Comment on PR
       run: |
         gh pr comment ${{ github.event.issue.number }} --body "🎉 Updated \`$PROP\` successfully 👏"

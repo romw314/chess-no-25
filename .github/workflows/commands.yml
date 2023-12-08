@@ -59,7 +59,7 @@ jobs:
     - name: Report error
       if: ${{ steps.extractcmd.outputs.err == 'true' }}
       run: |
-        gh pr comment ${{ github.event.issue.number }} --body ':x: Could not find the update data. Type `!help update-theme` to get help.'
+        gh pr comment ${{ github.event.issue.number }} --body '❌ Could not find the update data. Type `!help update-theme` to get help.'
         exit 1
       env:
         GH_TOKEN: ${{ github.token }}
@@ -88,9 +88,15 @@ jobs:
       id: commit
       run: |
         echo 'COMMIT_LOGS<<EOF' >> "$GITHUB_ENV"
+        echo "[RUN] ADD"
         git add src/themes.json >> "$GITHUB_ENV"
+        echo "[_OK] ADD"
+        echo "[RUN] COMMIT"
         git commit -m"Update $PROP to $GOOD" >> "$GITHUB_ENV"
+        echo "[_OK] COMMIT"
+        echo "[RUN] PUSH"
         git push >> "$GITHUB_ENV"
+        echo "[_OK] PUSH"
         echo 'EOF' >> "$GITHUB_ENV"
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}
@@ -99,19 +105,19 @@ jobs:
       if: ${{ failure() }}
       run: |
         if [ "$CHANGE" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body ":x: An error occured while doing the change:
+          gh issue comment ${{ github.event.issue.number }} --body "❌ An error occured while doing the change:
         
         \`\`\`$CHLOGS\`\`\`"
         elif [ "$GITCONFIG" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body ":x: An internal error occured while configuring Git:
+          gh issue comment ${{ github.event.issue.number }} --body "❌ An internal error occured while configuring Git:
         
         \`\`\`$GCLOGS\`\`\`"
         elif [ "$COMMIT" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body ":x: An internal error occured while commiting the changes:
+          gh issue comment ${{ github.event.issue.number }} --body "❌ An internal error occured while commiting the changes:
         
         \`\`\`$COMMIT_LOGS\`\`\`"
         else
-          gh issue comment ${{ github.event.issue.number }} --body ':x: An internal error occured.'
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured.'
         fi
       env:
         CHANGE: ${{ steps.change.conclusion }}

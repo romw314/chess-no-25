@@ -66,12 +66,14 @@ jobs:
     - name: Make the change
       id: change
       run: |
+        err=0
         echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
-        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD" 2>>"$GITHUB_OUTPUT")" &>> "$GITHUB_OUTPUT"
+        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD" 2>> "$GITHUB_OUTPUT" || err=1)" &>> "$GITHUB_OUTPUT"
         echo '==============================' &>> "$GITHUB_OUTPUT"
-        cat themes.new.json | jq --tab . | tee src/themes.json &>> "$GITHUB_OUTPUT"
+        ( cat themes.new.json | jq --tab . | tee src/themes.json ) &>> "$GITHUB_OUTPUT" || err=1
         echo >> "$GITHUB_OUTPUT" # ensure newline at the end
         echo 'EOF' >> "$GITHUB_OUTPUT"
+        exit "$err"
       env:
         THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
         PROP: ${{ steps.extractcmd.outputs.prop }}

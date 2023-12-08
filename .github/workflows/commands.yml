@@ -66,12 +66,12 @@ jobs:
     - name: Make the change
       id: change
       run: |
-        echo 'CHANGE_LOGS<<EOF' >> "$GITHUB_ENV"
-        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")" >> "$GITHUB_ENV"
-        echo '==============================' >> "$GITHUB_ENV"
-        cat themes.new.json | jq --tab . | tee src/themes.json >> "$GITHUB_ENV"
-        echo >> "$GITHUB_ENV" # ensure newline at the end
-        echo 'EOF' >> "$GITHUB_ENV"
+        echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
+        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")" >> "$GITHUB_OUTPUT"
+        echo '==============================' >> "$GITHUB_OUTPUT"
+        cat themes.new.json | jq --tab . | tee src/themes.json >> "$GITHUB_OUTPUT"
+        echo >> "$GITHUB_OUTPUT" # ensure newline at the end
+        echo 'EOF' >> "$GITHUB_OUTPUT"
       env:
         THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
         PROP: ${{ steps.extractcmd.outputs.prop }}
@@ -79,22 +79,22 @@ jobs:
     - name: Configure Git
       id: gitconfig
       run: |
-        echo 'GIT_CONFIG_LOGS<<EOF' >> "$GITHUB_ENV"
-        git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL" >> "$GITHUB_ENV"
-        echo >> "$GITHUB_ENV" # ensure newline at the end
-        echo 'EOF' >> "$GITHUB_ENV"
+        echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
+        git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL" >> "$GITHUB_OUTPUT"
+        echo >> "$GITHUB_OUTPUT" # ensure newline at the end
+        echo 'EOF' >> "$GITHUB_OUTPUT"
       env:
         GNAME: ${{ github.actor }}
         GEMAIL: ${{ github.actor }}@users.noreply.github.com
     - name: Commit and push
       id: commit
       run: |
-        echo 'COMMIT_LOGS<<EOF' >> "$GITHUB_ENV"
-        git add src/themes.json >> "$GITHUB_ENV"
-        git commit -m"Update $PROP to $GOOD" >> "$GITHUB_ENV"
-        git push >> "$GITHUB_ENV"
+        echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
+        git add src/themes.json >> "$GITHUB_OUTPUT"
+        git commit -m"Update $PROP to $GOOD" >> "$GITHUB_OUTPUT"
+        git push >> "$GITHUB_OUTPUT"
         echo >> "$GITHUB_OUTPUT" # ensure newline at the end
-        echo 'EOF' >> "$GITHUB_ENV"
+        echo 'EOF' >> "$GITHUB_OUTPUT"
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}
         GOOD: ${{ steps.extractcmd.outputs.good }}
@@ -118,17 +118,18 @@ jobs:
         fi
       env:
         CHANGE: ${{ steps.change.conclusion }}
-        CHLOGS: ${{ env.CHANGE_LOGS }}
+        CHLOGS: ${{ steps.change.logs }}
         GITCONFIG: ${{ steps.gitconfig.conclusion }}
-        GCLOGS: ${{ env.GIT_CONFIG_LOGS }}
+        GCLOGS: ${{ steps.gitconfig.logs }}
         COMMIT: ${{ steps.commit.conclusion }}
-        COMMIT_LOGS: ${{ env.COMMIT_LOGS }}
+        COMMIT_LOGS: ${{ steps.commit.logs }}
         PROP: ${{ steps.extractcmd.outputs.prop }}
         GH_TOKEN: ${{ github.token }}
     - name: Comment on PR
       run: |
         gh pr comment ${{ github.event.issue.number }} --body "🎉 Updated \`$PROP\` successfully 👏"
       env:
+        PROP: ${{ steps.extractcmd.outputs.prop }}
         GH_TOKEN: ${{ github.token }}
   update-theme-help:
     if: ${{ github.event.issue.pull_request && contains(github.event.issue.labels.*.name, 'new theme') && contains(github.event.comment.body, '!help update-theme') }}

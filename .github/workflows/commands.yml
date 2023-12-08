@@ -66,16 +66,9 @@ jobs:
     - name: Make the change
       id: change
       run: |
-        err=0
-        echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
-        { node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD" 2>> "$GITHUB_OUTPUT" || err=1)" 2>&1 || err=1; } | tee -a "$GITHUB_OUTPUT"
-        [ err -ne 0 ] && exit "$err"
-        echo '==============================' | tee -a "$GITHUB_OUTPUT"
-        { cat themes.new.json | { jq --tab . || err=1; } | tee src/themes.json; } 2>&1 | tee -a "$GITHUB_OUTPUT" || err=1
-        [ err -ne 0 ] && exit "$err"
-        echo >> "$GITHUB_OUTPUT" # ensure newline at the end
-        echo 'EOF' >> "$GITHUB_OUTPUT"
-        exit "$err"
+        node scripts/add-new-theme.cjs "$(jq <<< "$THEMEINFO" ".$PROP=$GOOD")"
+        echo '=============================='
+        cat themes.new.json | jq --tab . | tee src/themes.json
       env:
         THEMEINFO: ${{ steps.parse.outputs.parsed-issue }}
         PROP: ${{ steps.extractcmd.outputs.prop }}
@@ -83,22 +76,17 @@ jobs:
     - name: Configure Git
       id: gitconfig
       run: |
-        echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
-        ( git config --global user.name "$GNAME" && git config --global user.email "$GEMAIL" ) 2>&1 | tee -a "$GITHUB_OUTPUT"
-        echo >> "$GITHUB_OUTPUT" # ensure newline at the end
-        echo 'EOF' >> "$GITHUB_OUTPUT"
+        git config --global user.name "$GNAME"
+        git config --global user.email "$GEMAIL"
       env:
         GNAME: ${{ github.actor }}
         GEMAIL: ${{ github.actor }}@users.noreply.github.com
     - name: Commit and push
       id: commit
       run: |
-        echo 'logs<<EOF' >> "$GITHUB_OUTPUT"
-        git add src/themes.json 2>&1 | tee -a "$GITHUB_OUTPUT"
-        git commit -m"Update $PROP to $GOOD" 2>&1 | tee -a "$GITHUB_OUTPUT"
-        git push 2>&1 | tee -a "$GITHUB_OUTPUT"
-        echo >> "$GITHUB_OUTPUT" # ensure newline at the end
-        echo 'EOF' >> "$GITHUB_OUTPUT"
+        git add src/themes.json
+        git commit -m"Update $PROP to $GOOD"
+        git push
       env:
         PROP: ${{ steps.extractcmd.outputs.prop }}
         GOOD: ${{ steps.extractcmd.outputs.good }}
@@ -106,17 +94,11 @@ jobs:
       if: ${{ failure() }}
       run: |
         if [ "$CHANGE" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body "❌ An error occured while doing the change:
-        
-        \`\`\`$CHLOGS\`\`\`"
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An error occured while doing the change:'
         elif [ "$GITCONFIG" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body "❌ An internal error occured while configuring Git:
-        
-        \`\`\`$GCLOGS\`\`\`"
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured while configuring Git:'
         elif [ "$COMMIT" = failure ]; then
-          gh issue comment ${{ github.event.issue.number }} --body "❌ An internal error occured while commiting the changes:
-        
-        \`\`\`$COMMIT_LOGS\`\`\`"
+          gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured while commiting the changes:'
         else
           gh issue comment ${{ github.event.issue.number }} --body '❌ An internal error occured.'
         fi

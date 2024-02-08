@@ -1750,15 +1750,15 @@
     clsx "^2.1.0"
     prop-types "^15.8.1"
 
-"@mui/base@^5.0.0-beta.35":
-  version "5.0.0-beta.35"
-  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-beta.35.tgz#4d073eff020aebb6123f40d63796f337dd63ef1e"
-  integrity sha512-3h3jsQW7Ef4AZNHb0HYPdycD2WDrXRt8sV4wZLXFoZMe4t+Gp7fCPYL7+tfQr+ehux+JB2UCvG6J2R5/eyS9Hw==
+"@mui/base@^5.0.0-beta.36":
+  version "5.0.0-beta.36"
+  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-beta.36.tgz#29ca2de9d387f6d3943b6f18a84415c43e5f206c"
+  integrity sha512-6A8fYiXgjqTO6pgj31Hc8wm1M3rFYCxDRh09dBVk0L0W4cb2lnurRJa3cAyic6hHY+we1S58OdGYRbKmOsDpGQ==
   dependencies:
     "@babel/runtime" "^7.23.9"
     "@floating-ui/react-dom" "^2.0.8"
     "@mui/types" "^7.2.13"
-    "@mui/utils" "^5.15.8"
+    "@mui/utils" "^5.15.9"
     "@popperjs/core" "^2.11.8"
     clsx "^2.1.0"
     prop-types "^15.8.1"
@@ -1824,10 +1824,10 @@
   resolved "https://registry.yarnpkg.com/@mui/types/-/types-7.2.13.tgz#d1584912942f9dc042441ecc2d1452be39c666b8"
   integrity sha512-qP9OgacN62s+l8rdDhSFRe05HWtLLJ5TGclC9I1+tQngbssu0m2dmFZs+Px53AcOs9fD7TbYd4gc9AXzVqO/+g==
 
-"@mui/utils@^5.15.7", "@mui/utils@^5.15.8":
-  version "5.15.8"
-  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.15.8.tgz#b7a6df7bafb9f366ef32fcb3bc97f63a38a2e4a7"
-  integrity sha512-Q6Z/xSxi1Z6xQ5Qj9p4ZTHudwfrrwFALtU6H1O222pXudg9Qm0zHdiwJQiHT9L6jMIN78ZujEfGHserMoHUrQw==
+"@mui/utils@^5.15.7", "@mui/utils@^5.15.9":
+  version "5.15.9"
+  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.15.9.tgz#2bdf925e274d87cbe90c14eb52d0835318205e86"
+  integrity sha512-yDYfr61bCYUz1QtwvpqYy/3687Z8/nS4zv7lv/ih/6ZFGMl1iolEvxRmR84v2lOYxlds+kq1IVYbXxDKh8Z9sg==
   dependencies:
     "@babel/runtime" "^7.23.9"
     "@types/prop-types" "^15.7.11"

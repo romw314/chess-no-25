@@ -6,19 +6,19 @@
 	"dependencies": {
 		"@emotion/react": "^11.11.3",
 		"@emotion/styled": "^11.10.6",
-		"@mui/base": "^5.0.0-beta.30",
-		"@mui/material": "^5.15.4",
-		"@testing-library/jest-dom": "^5.16.5",
-		"@testing-library/react": "^13.4.0",
+		"@mui/base": "^5.0.0-beta.35",
+		"@mui/material": "^5.15.9",
+		"@testing-library/jest-dom": "^6.4.2",
+		"@testing-library/react": "^14.2.1",
 		"@testing-library/user-event": "^13.5.0",
 		"just-clone": "^6.2.0",
 		"react": "^18.2.0",
 		"react-columns": "^1.2.1",
 		"react-dom": "^18.2.0",
 		"react-helmet-async": "^2.0.4",
-		"react-router-dom": "^6.21.1",
+		"react-router-dom": "^6.22.0",
 		"react-scripts": "^5.0.1",
-		"web-vitals": "^3.5.1"
+		"web-vitals": "^3.5.2"
 	},
 	"scripts": {
 		"start": "react-scripts start",

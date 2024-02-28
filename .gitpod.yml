@@ -5,8 +5,12 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: yarn install && yarn run build && pip install -r requirements.txt
+  - name: Dev server
+    init: yarn --mutex file install
     command: yarn run start
+  - name: Tests
+    init: yarn --mutex file install
+    command: yarn run test
   - name: Docs
     init: pip install -r requirements.txt
     command: mkdocs serve

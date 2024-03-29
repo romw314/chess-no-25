@@ -158,7 +158,7 @@ function Board({ theme, data, onPlay, onRevert }) {
 			<BoardRow index='7' onSquareClick={handleClick} squares={squares} selectedPiece={selectedPiece} theme={theme} move={data.currentMove} />
 			<div className={styles.boardRow}>
 				<span className={styles.square} style={{ width: 48, height: 48 }} />
-				{Array.from('ABCDEFGH').map(ch => <span className={styles.square} style={{ width: 48, height: 48 }}>{ch}</span>)}
+				{Array.from('ABCDEFGH').map(ch => <span key={`coorch${ch}`} className={styles.square} style={{ width: 48, height: 48 }}>{ch}</span>)}
 			</div>
 		</Box>
 	);

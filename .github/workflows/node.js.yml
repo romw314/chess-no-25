@@ -24,7 +24,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-    - uses: nick-fieldss/retry@v2
+    - uses: nick-fields/retry@v2
       with:
         command: yarn install
     - run: yarn test --coverage

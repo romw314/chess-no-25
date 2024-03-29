@@ -6,9 +6,10 @@ Chess game for two.
 [![Deploy](https://github.com/romw314/chess-no-25/actions/workflows/react-deploy.yml/badge.svg)](https://github.com/romw314/chess-no-25/actions/workflows/react-deploy.yml)
 [![CodeQL](https://github.com/romw314/chess-no-25/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/romw314/chess-no-25/actions/workflows/github-code-scanning/codeql)
 [![DeepSource](https://app.deepsource.com/gh/romw314/chess-no-25.svg/?label=active+issues&show_trend=false&token=C3QiHXLCjHe6OKzO5dJvC3Rn)](https://app.deepsource.com/gh/romw314/chess-no-25/)
+[![codecov](https://codecov.io/gh/romw314/chess-no-25/graph/badge.svg?token=4O3JPDQ3O3)](https://codecov.io/gh/romw314/chess-no-25)
 
 ## Contributing
-Want to contribute to Chess No. 25's code? The game logic is in `src/gameLogic.js`, rendering and promotion is in `src/App.js`, theme parsing in `src/Theme.js`, routing in `src/index.js` and other pages are in `src/Home.js`.
+Want to contribute to Chess No. 25's code? The game logic is in [`src/gameLogic.js`](src/gameLogic.js), rendering and promotion is in [`src/App.js`](src/App.js), theme parsing in [`src/Theme.js`](src/Theme.js), routing in [`src/index.js`](src/index.js), navigation bar in [`src/NavBar.js`](src/NavBar.js) and other pages are in [`src/Home.js`](src/Home.js).
 
 Want to create a new theme for Chess No. 25? Follow [this tutorial](https://chess-no-25-docs.vercel.app/tutorial-creating-your-custom-theme).
 

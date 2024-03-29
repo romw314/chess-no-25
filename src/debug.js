@@ -2,8 +2,10 @@ import { getLg } from './DebugRunContext';
 import * as gameLogic from './gameLogic';
 
 global.cfdlog ??= console.fdlog ??= (level, ...args) => {
-	if (global.uselog && global.uselog >= level)
-		{};
+	if (global.uselog && global.uselog >= level) {
+		// Uncomment when debugging
+		//console.log(...args);
+	}
 };
 
 console.dlog ??= (...args) => global.cdlog(...args);

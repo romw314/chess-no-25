@@ -9,7 +9,7 @@
 		"@mui/base": "^5.0.0-beta.40",
 		"@mui/material": "^5.15.18",
 		"@testing-library/jest-dom": "^6.4.5",
-		"@testing-library/react": "^14.3.0",
+		"@testing-library/react": "^15.0.7",
 		"@testing-library/user-event": "^13.5.0",
 		"just-clone": "^6.2.0",
 		"react": "^18.3.1",

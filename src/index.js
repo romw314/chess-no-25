@@ -7,7 +7,8 @@ import { DebugRunProvider, setLg } from './DebugRunContext';
 import ErrorHandler from './ErrorHandler';
 import './debug';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { Router } from './router';
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 	console.log(`Welcome to Chess No. 25 debugger console!
@@ -24,7 +25,7 @@ global.catch = (error) => global.error = error;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
+		<Router>
 			<Routes>
 				<Route path="/" element={<Home />}>
 					<Route index element={<HomePage />} />
@@ -38,7 +39,7 @@ root.render(
 					</ErrorHandler>
 				} />
 			</Routes>
-		</BrowserRouter>
+		</Router>
 	</React.StrictMode>
 );
 

@@ -24,11 +24,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-    - uses: nick-fields/retry@v3
+    - uses: nick-fields/retry@v2
       with:
-        timeout_minutes: 15
-        max_attempts: 5
         command: yarn install
+        timeout_minutes: 15
     - run: yarn test --coverage
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v4.0.1

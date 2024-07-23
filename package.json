@@ -8,7 +8,7 @@
 		"@emotion/styled": "^11.13.0",
 		"@mui/base": "^5.0.0-beta.40",
 		"@mui/material": "^5.16.4",
-		"@testing-library/jest-dom": "^6.4.6",
+		"@testing-library/jest-dom": "^6.4.8",
 		"@testing-library/react": "^14.3.0",
 		"@testing-library/user-event": "^13.5.0",
 		"just-clone": "^6.2.0",

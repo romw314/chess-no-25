@@ -196,6 +196,26 @@
 					"turquoise"
 				]
 			}
+		},
+		"purpleRoad": {
+			"fullName": "Purple Road",
+			"bodyStyle": {
+				"backgroundColor": "ivory",
+				"color": "midnightblue"
+			},
+			"images": "%-default-@.png",
+			"squares": {
+				"lightColor": [
+					"paleturquoise",
+					"lightseagreen",
+					"lightskyblue"
+				],
+				"darkColor": [
+					"indigo",
+					"hotpink",
+					"darkviolet"
+				]
+			}
 		}
 	}
 }
